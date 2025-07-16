@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Build Your Pack</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Load Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <h1>Build Your Pack</h1>
+
+  <label for="pack-item-select">Choose an item:</label>
+  <select id="pack-item-select">
+    <option value="">— Select an item —</option>
+  </select>
+
+  <!-- List of selected items -->
+  <ul id="cart-items"></ul>
+
+  <div id="cart-total-container">
+    Cart Total: <span id="cart-total">$0.00</span>
+  </div>
+
+  <!-- Checkout button -->
+  <button id="checkout-btn" class="checkout-btn">
+    Checkout
+  </button>
+
+  <script type="module" src="assets/js/pack-builder.js"></script>
+</body>
+</html>
