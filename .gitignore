@@ -1,1 +1,90 @@
-.vercel
+// src/components/PricingPlans.jsx
+
+import React from 'react';
+import './PricingPlans.css';
+
+const PricingPlans = () => (
+  <section id="pricing-plans" className="pricing-section">
+    <h2>Pricing &amp; Plans</h2>
+    <p>
+      Choose a one-time order or subscribe &amp; save. Every plan comes
+      with our eco-friendly packaging and fresh ingredients.
+    </p>
+
+    <h3>Subscription vs. One-Time</h3>
+    <ul>
+      <li>
+        <strong>One-Time Order:</strong> Try us out—no commitment, full price.
+      </li>
+      <li>
+        <strong>Weekly Subscription:</strong> Auto-renew each week, pause/
+        cancel anytime before cutoff, save 10–15%.
+      </li>
+    </ul>
+
+    <h3>Bundle Pricing</h3>
+    <div className="table-responsive">
+      <table className="pricing-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Meals/Servings</th>
+            <th>One-Time</th>
+            <th>Subscribed Price</th>
+            <th>Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kid-Friendly Bundle</td>
+            <td>5 kid meals/week</td>
+            <td>$55 / week</td>
+            <td>$49.50 / week</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>Large Family Bundle</td>
+            <td>8 family meals (4–6 servings each)</td>
+            <td>$160 / week</td>
+            <td>$136 / week</td>
+            <td>15%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p className="pricing-footnote">
+      <em>Add-On Meals:</em> $11/meal (kids) · $18/serving (family) ·
+      <em> Delivery:</em> $5 (free over $100)
+    </p>
+
+    <h3>How It Works</h3>
+    <ol>
+      <li>
+        Select your bundle (Kid or Family), choose One-Time or Subscribe &amp;
+        Save.
+      </li>
+      <li>
+        Customize your lineup with bowls, snacks, smoothies, or bundle
+        add-ons.
+      </li>
+      <li>
+        Check out—then sit back while we prep, pack, and deliver fresh
+        meals.
+      </li>
+      <li>
+        Manage your subscription anytime in your account (pause, swap, or
+        cancel).
+      </li>
+    </ol>
+
+    <p className="cta">
+      <a href="/menu" className="button-primary">
+        Build Your Pack &amp; Choose Your Plan
+      </a>
+    </p>
+  </section>
+);
+
+export default PricingPlans;
+node_modules
