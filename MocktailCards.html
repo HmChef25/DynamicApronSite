@@ -51,6 +51,7 @@
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 6px;
+      max-width: 400px;
     }
 
     .bundle-summary-box ul {
@@ -61,6 +62,10 @@
     .bundle-summary-box li {
       margin-bottom: 0.5rem;
     }
+
+    .bundle-summary-box p {
+      margin: 0.5rem 0;
+    }
   </style>
 </head>
 <body>
@@ -68,7 +73,7 @@
   <h1>Mocktail Add-On Gallery</h1>
 
   <section class="card-grid">
-
+    <!-- Repeatable mocktail cards -->
     <div class="card">
       <img src="images/lemon-thyme-spark.jpg" alt="Lemon Thyme Spark">
       <h3>Lemon Thyme Spark</h3>
@@ -116,13 +121,15 @@
       <p class="price">$13</p>
       <button class="add-to-bundle" data-item="Pineapple Sage Spritz">Add to Bundle</button>
     </div>
-
   </section>
 
   <div id="bundle-summary" class="bundle-summary-box">
     <h3>Bundle Summary</h3>
     <ul></ul>
-    <p><strong>Total:</strong> $0</p>
+    <p><strong>Items Selected:</strong> 0</p>
+    <p><strong>Total:</strong> $0.00</p>
+    <p><strong>Discount:</strong> 0%</p>
+    <p><strong>Final Price:</strong> $0.00</p>
   </div>
 
   <script>
@@ -137,14 +144,26 @@
       updateSummary();
     }
 
+    function calculateDiscount(count) {
+      if (count >= 5) return 0.15;
+      if (count >= 3) return 0.10;
+      return 0;
+    }
+
     function updateSummary() {
       const summaryBox = document.getElementById('bundle-summary');
+      const discountRate = calculateDiscount(bundle.items.length);
+      const discountedTotal = bundle.total * (1 - discountRate);
+
       summaryBox.innerHTML = `
         <h3>Bundle Summary</h3>
         <ul>
           ${bundle.items.map(item => `<li>${item.name} - $${item.price}</li>`).join('')}
         </ul>
-        <p><strong>Total:</strong> $${bundle.total}</p>
+        <p><strong>Items Selected:</strong> ${bundle.items.length}</p>
+        <p><strong>Total:</strong> $${bundle.total.toFixed(2)}</p>
+        <p><strong>Discount:</strong> ${discountRate * 100}%</p>
+        <p><strong>Final Price:</strong> $${discountedTotal.toFixed(2)}</p>
       `;
     }
 
