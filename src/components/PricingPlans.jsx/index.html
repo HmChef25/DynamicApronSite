@@ -1,32 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Build Your Pack</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- Load Stripe.js -->
-  <script src="https://js.stripe.com/v3/"></script>
-</head>
-<body>
-  <h1>Build Your Pack</h1>
+<!-- ✅ Bundle Summary Section -->
+<div id="bundle-summary" style="border: 2px solid #2c3e50; padding: 20px; margin-top: 30px; border-radius: 8px; background-color: #f9f9f9; max-width: 500px;">
+    <h3 style="margin-top: 0; color: #2c3e50;">🧺 Your Bundle</h3>
+    <ul id="bundle-list" style="list-style-type: none; padding-left: 0;"></ul>
+    <p id="bundle-total" style="font-weight: bold; margin-top: 10px;">Total: $0.00</p>
+</div>
 
-  <label for="pack-item-select">Choose an item:</label>
-  <select id="pack-item-select">
-    <option value="">— Select an item —</option>
-  </select>
+<!-- ✅ Add-to-Bundle Buttons -->
+<div style="margin-top: 20px;">
+    <button onclick="addToBundle('Olive Tapenade', 4.99)">Add Olive Tapenade ($4.99)</button>
+    <button onclick="addToBundle('Lemon Herb Chicken', 8.49)">Add Lemon Herb Chicken ($8.49)</button>
+    <button onclick="addToBundle('Roasted Veggie Medley', 5.25)">Add Roasted Veggie Medley ($5.25)</button>
+</div>
 
-  <!-- List of selected items -->
-  <ul id="cart-items"></ul>
+<!-- ✅ JavaScript Logic -->
+<script>
+let total = 0;
 
-  <div id="cart-total-container">
-    Cart Total: <span id="cart-total">$0.00</span>
-  </div>
+function addToBundle(item, price) {
+    const list = document.getElementById('bundle-list');
 
-  <!-- Checkout button -->
-  <button id="checkout-btn" class="checkout-btn">
-    Checkout
-  </button>
+    // Create list item
+    const li = document.createElement('li');
+    li.textContent = `${item} - $${price.toFixed(2)}`;
+    li.style.cursor = 'pointer';
+    li.style.padding = '6px 0';
+    li.style.color = '#34495e';
 
-  <script type="module" src="assets/js/pack-builder.js"></script>
-</body>
-</html>
+    // Store price in dataset for removal
+    li.dataset.price = price;
+
+    // Add click-to-remove functionality
+    li.onclick = function() {
+        total -= parseFloat(li.dataset.price);
+        document.getElementById('bundle-total').textContent = `Total: $${total.toFixed(2)}`;
+        list.removeChild(li);
+    };
+
+    // Append to list
+    list.appendChild(li);
+
+    // Update total
+    total += price;
+    document.getElementById('bundle-total').textContent = `Total: $${total.toFixed(2)}`;
+}
+</script>

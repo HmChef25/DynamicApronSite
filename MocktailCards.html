@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocktail Add-On Gallery</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .price {
+      font-weight: bold;
+      margin: 0.5rem 0;
+    }
+
+    .add-to-bundle {
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .bundle-summary-box {
+      margin-top: 3rem;
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .bundle-summary-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .bundle-summary-box li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mocktail Add-On Gallery</h1>
+
+  <section class="card-grid">
+
+    <div class="card">
+      <img src="images/lemon-thyme-spark.jpg" alt="Lemon Thyme Spark">
+      <h3>Lemon Thyme Spark</h3>
+      <p>Bright lemon zest meets earthy thyme with a touch of honey.</p>
+      <p class="price">$12</p>
+      <button class="add-to-bundle" data-item="Lemon Thyme Spark">Add to Bundle</button>
+    </div>
+
+    <div class="card">
+      <img src="images/fig-basil-boost.jpg" alt="Fig Basil Boost">
+      <h3>Fig Basil Boost</h3>
+      <p>Deep fig notes layered with basil and a hint of balsamic.</p>
+      <p class="price">$14</p>
+      <button class="add-to-bundle" data-item="Fig Basil Boost">Add to Bundle</button>
+    </div>
+
+    <div class="card">
+      <img src="images/blueberry-sage-drift.jpg" alt="Blueberry Sage Drift">
+      <h3>Blueberry Sage Drift</h3>
+      <p>Gentle blueberry meets aromatic sage, lightly sweetened with agave.</p>
+      <p class="price">$13</p>
+      <button class="add-to-bundle" data-item="Blueberry Sage Drift">Add to Bundle</button>
+    </div>
+
+    <div class="card">
+      <img src="images/strawberry-rose-lift.jpg" alt="Strawberry Rose Lift">
+      <h3>Strawberry Rose Lift</h3>
+      <p>Juicy strawberries with a touch of rose water for a fragrant lift.</p>
+      <p class="price">$13</p>
+      <button class="add-to-bundle" data-item="Strawberry Rose Lift">Add to Bundle</button>
+    </div>
+
+    <div class="card">
+      <img src="images/cucumber-mint-clarity.jpg" alt="Cucumber Mint Clarity">
+      <h3>Cucumber Mint Clarity</h3>
+      <p>Cool cucumber and vibrant mint, lightly sweetened with honey.</p>
+      <p class="price">$13</p>
+      <button class="add-to-bundle" data-item="Cucumber Mint Clarity">Add to Bundle</button>
+    </div>
+
+    <div class="card">
+      <img src="images/pineapple-sage-spritz.jpg" alt="Pineapple Sage Spritz">
+      <h3>Pineapple Sage Spritz</h3>
+      <p>Tropical pineapple and aromatic sage in a crisp fusion.</p>
+      <p class="price">$13</p>
+      <button class="add-to-bundle" data-item="Pineapple Sage Spritz">Add to Bundle</button>
+    </div>
+
+  </section>
+
+  <div id="bundle-summary" class="bundle-summary-box">
+    <h3>Bundle Summary</h3>
+    <ul></ul>
+    <p><strong>Total:</strong> $0</p>
+  </div>
+
+  <script>
+    const bundle = {
+      items: [],
+      total: 0
+    };
+
+    function addItem(name, price) {
+      bundle.items.push({ name, price });
+      bundle.total += price;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const summaryBox = document.getElementById('bundle-summary');
+      summaryBox.innerHTML = `
+        <h3>Bundle Summary</h3>
+        <ul>
+          ${bundle.items.map(item => `<li>${item.name} - $${item.price}</li>`).join('')}
+        </ul>
+        <p><strong>Total:</strong> $${bundle.total}</p>
+      `;
+    }
+
+    document.querySelectorAll('.add-to-bundle').forEach(button => {
+      button.addEventListener('click', () => {
+        const itemName = button.dataset.item;
+        const priceText = button.previousElementSibling.textContent;
+        const price = parseFloat(priceText.replace('$', ''));
+        addItem(itemName, price);
+      });
+    });
+  </script>
+
+</body>
+</html>
