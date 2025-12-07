@@ -17,16 +17,8 @@ Thumbs.db
 
 # Windows profile clutter
 AppData/
-Documents/
-Downloads/
-Music/
-Videos/
-Saved Games/
-Contacts/
-Links/
-Favorites/
-Searches/
-NTUSER.*
-
-# PowerShell artifacts
-*.ps1.rtf
+OneDrive/
+.aws/
+.fx/
+.redhat/
+SOP_RunLog*.txt
