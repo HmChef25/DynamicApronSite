@@ -1,70 +1,166 @@
-# Getting Started with Create React App
+# 🥗 Dynamic Apron
+
+**Mediterranean-inspired meal prep bundles** designed for health-conscious food lovers.  
+Crafted by Daniel — Entrepreneur & Personal Chef.
+
+![React](https://img.shields.io/badge/Built%20with-React-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+---
+
+## 🚀 Features
+
+- 🧩 Interactive pricing plans with bundle logic  
+- 🍹 Mocktail Add-On Gallery with visual storytelling  
+- 📱 Responsive layout and smooth anchor navigation  
+- 💬 Contact form and promotional banner  
+- 🎁 Discount tiers and perks integration  
+- 🖼️ Visual branding with curated food photography  
+
+---
+
+## 🌐 Live Demo
+
+Coming soon via [Strikingly](https://www.strikingly.com/) or GitHub Pages.
+
+---
+
+## 📸 Preview
+
+![Dynamic Apron Screenshot](https://i.imgur.com/your-image-id.png)  
+*Mocktail Gallery section with hover effects and bundle pricing tiers.*
+
+> Replace the link above with your actual image URL from imgbb or another host.
+
+---
+
+## 🚀 Deploying to Strikingly
+
+Strikingly doesn’t support full React apps directly, but you can:
+
+### Option 1: Embed Sections via HTML
+- Export key sections (e.g. pricing, gallery) as HTML/CSS
+- Paste into a Strikingly **Custom Code block**
+
+### Option 2: Host React App Externally
+- Deploy your React app to [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/)
+- Embed the live site in Strikingly via an **iframe** or external link
+
+### Option 3: Use Strikingly for Landing Page
+- Keep your React app as the backend
+- Use Strikingly for branding, contact, and affiliate links
+
+---
+
+## 📦 Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.\
+Runs the app in development mode.  
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `build` folder.  
+Optimized for performance and deployment.
 
 ### `npm run eject`
-
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🧠 Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React  
+- HTML/CSS  
+- JavaScript  
+- PowerShell (for automation and backups)  
+- Canva + imgbb (for image generation and hosting)  
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📚 Learn More
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Create React App Docs](https://facebook.github.io/create-react-app/docs/getting-started)  
+- [React Documentation](https://reactjs.org/)  
+- [Deployment Guide](https://facebook.github.io/create-react-app/docs/deployment)  
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📸 Image Hosting & Optimization
 
-### Analyzing the Bundle Size
+Images are generated via Canva and hosted on [imgbb](https://imgbb.com).  
+Optimized using [TinyPNG](https://tinypng.com) and [Squoosh](https://squoosh.app).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 📁 Folder Structure
 
-### Making a Progressive Web App
+```
+DynamicApron/
+├── public/
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── PricingPlans.jsx
+│   │   └── MocktailGallery.jsx
+│   ├── assets/
+│   │   └── Mocktails/
+│   │       └── Originals/
+│   └── App.jsx
+├── README.md
+└── package.json
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🧪 Affiliate Integration (In Progress)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Exploring affiliate partnerships with:
+- Nakano Knives  
+- Mediterranean pantry brands  
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📈 Changelog
 
-### `npm run build` fails to minify
+### v1.0.0 – Initial Launch
+- PricingPlans.jsx component  
+- MocktailGallery.jsx scaffold  
+- Contact form and banner embedded  
+- Anchor link navigation optimized  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome!  
+For major changes, please open an issue first to discuss what you’d like to change.
+
+### Setup Instructions
+
+```bash
+git clone https://github.com/your-username/DynamicApron.git
+cd DynamicApron
+npm install
+npm start
+```
+
+---
+
+## 👨‍🍳 Author
+
+**Daniel**  
+Entrepreneur & Personal Chef  
+Founder of Dynamic Apron  
+Focused on flavor, wellness, and seamless digital experiences.
+
+---
+
+## 🛠️ License
+
+This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
