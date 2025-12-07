@@ -1,3 +1,94 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<!-- ✅ Bundle Summary Section -->
+<div id="bundle-summary" style="border: 2px solid #2c3e50; padding: 20px; margin-top: 30px; border-radius: 8px; background-color: #f9f9f9; max-width: 500px;">
+    <h3 style="margin-top: 0; color: #2c3e50;">🧺 Your Bundle</h3>
+    <ul id="bundle-list" style="list-style-type: none; padding-left: 0;"></ul>
+    <p id="bundle-total" style="font-weight: bold; margin-top: 10px;">Total: $0.00</p>
+    <p id="bundle-tier" style="color: #27ae60; font-weight: bold;"></p>
+</div>
+
+<!-- ✅ Add-to-Bundle Buttons -->
+<div style="margin-top: 20px;">
+    <button onclick="addToBundle('Olive Tapenade', 4.99)">Add Olive Tapenade ($4.99)</button>
+    <button onclick="addToBundle('Lemon Herb Chicken', 8.49)">Add Lemon Herb Chicken ($8.49)</button>
+    <button onclick="addToBundle('Roasted Veggie Medley', 5.25)">Add Roasted Veggie Medley ($5.25)</button>
+    <button onclick="addToBundle('Stuffed Grape Leaves', 6.75)">Add Stuffed Grape Leaves ($6.75)</button>
+</div>
+
+<!-- ✅ Modal Popup -->
+<div id="bundle-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); z-index:1000;">
+    <div style="background-color:#fff; padding:30px; border-radius:10px; max-width:400px; margin:100px auto; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.3);">
+        <h2 id="modal-title" style="margin-top:0;">🎉 Bundle Unlocked!</h2>
+        <p id="modal-message">You’ve unlocked a special perk!</p>
+        <button onclick="closeModal()" style="margin-top:20px;">Close</button>
+    </div>
+</div>
+
+<!-- ✅ JavaScript Logic with Tier Feedback + Modal -->
+<script>
+let total = 0;
+let lastTier = "";
+
+function addToBundle(item, price) {
+    const list = document.getElementById('bundle-list');
+
+    const li = document.createElement('li');
+    li.textContent = `${item} - $${price.toFixed(2)}`;
+    li.style.cursor = 'pointer';
+    li.style.padding = '6px 0';
+    li.style.color = '#34495e';
+    li.dataset.price = price;
+
+    li.onclick = function() {
+        total -= parseFloat(li.dataset.price);
+        list.removeChild(li);
+        updateTotal();
+    };
+
+    list.appendChild(li);
+    total += price;
+    updateTotal();
+}
+
+function updateTotal() {
+    document.getElementById('bundle-total').textContent = `Total: $${total.toFixed(2)}`;
+    const tierMsg = document.getElementById('bundle-tier');
+    const summaryBox = document.getElementById('bundle-summary');
+
+    if (total >= 25 && lastTier !== "premium") {
+        tierMsg.textContent = "🎉 Premium Bundle Unlocked!";
+        summaryBox.style.borderColor = "#e67e22";
+        summaryBox.style.backgroundColor = "#fff8e6";
+        showModal("🎁 Premium Perk!", "Free delivery + bonus dessert included!");
+        lastTier = "premium";
+    } else if (total >= 15 && lastTier !== "standard" && total < 25) {
+        tierMsg.textContent = "✨ Standard Bundle Activated!";
+        summaryBox.style.borderColor = "#27ae60";
+        summaryBox.style.backgroundColor = "#eafaf1";
+        showModal("✨ Standard Perk!", "Free delivery included!");
+        lastTier = "standard";
+    } else if (total < 15) {
+        tierMsg.textContent = "";
+        summaryBox.style.borderColor = "#2c3e50";
+        summaryBox.style.backgroundColor = "#f9f9f9";
+        lastTier = "";
+    }
+}
+
+function showModal(title, message) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-message').textContent = message;
+    document.getElementById('bundle-modal').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('bundle-modal').style.display = "none";
+}
+</script>
+=======
+>>>>>>> bb71a48
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,3 +132,7 @@
     -->
   </body>
 </html>
+<<<<<<< HEAD
+=======
+>>>>>>> 01ea0bc (Initialize project using Create React App)
+>>>>>>> bb71a48

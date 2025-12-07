@@ -1,0 +1,46 @@
+<!-- ✅ Bundle Summary Section -->
+<div id="bundle-summary" style="border: 2px solid #2c3e50; padding: 20px; margin-top: 30px; border-radius: 8px; background-color: #f9f9f9; max-width: 500px;">
+    <h3 style="margin-top: 0; color: #2c3e50;">🧺 Your Bundle</h3>
+    <ul id="bundle-list" style="list-style-type: none; padding-left: 0;"></ul>
+    <p id="bundle-total" style="font-weight: bold; margin-top: 10px;">Total: $0.00</p>
+</div>
+
+<!-- ✅ Add-to-Bundle Buttons -->
+<div style="margin-top: 20px;">
+    <button onclick="addToBundle('Olive Tapenade', 4.99)">Add Olive Tapenade ($4.99)</button>
+    <button onclick="addToBundle('Lemon Herb Chicken', 8.49)">Add Lemon Herb Chicken ($8.49)</button>
+    <button onclick="addToBundle('Roasted Veggie Medley', 5.25)">Add Roasted Veggie Medley ($5.25)</button>
+</div>
+
+<!-- ✅ JavaScript Logic -->
+<script>
+let total = 0;
+
+function addToBundle(item, price) {
+    const list = document.getElementById('bundle-list');
+
+    // Create list item
+    const li = document.createElement('li');
+    li.textContent = `${item} - $${price.toFixed(2)}`;
+    li.style.cursor = 'pointer';
+    li.style.padding = '6px 0';
+    li.style.color = '#34495e';
+
+    // Store price in dataset for removal
+    li.dataset.price = price;
+
+    // Add click-to-remove functionality
+    li.onclick = function() {
+        total -= parseFloat(li.dataset.price);
+        document.getElementById('bundle-total').textContent = `Total: $${total.toFixed(2)}`;
+        list.removeChild(li);
+    };
+
+    // Append to list
+    list.appendChild(li);
+
+    // Update total
+    total += price;
+    document.getElementById('bundle-total').textContent = `Total: $${total.toFixed(2)}`;
+}
+</script>

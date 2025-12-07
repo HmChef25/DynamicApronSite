@@ -1,0 +1,200 @@
+/* Base Layout */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdf6f0;
+  color: #333;
+  margin: 0;
+  padding: 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  color: #e76f51;
+}
+
+/* Responsive Card Grid */
+.flavor-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+/* Flavor Card Styling */
+.flavor-card {
+  background-color: #fefefe;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.flavor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+.diet-tags {
+  margin-bottom: 0.75rem;
+}
+
+.badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+  background-color: #ececec;
+  display: inline-block;
+}
+
+.badge.vegetarian { background-color: #c6f6d5; }
+.badge.vegan { background-color: #c8e6c9; }
+.badge.gluten-free { background-color: #ffe0b2; }
+.badge.soy-free { background-color: #ed8936; }
+.badge.dairy-free { background-color: #f56565; }
+.badge.high-protein { background-color: #48bb78; }
+
+.bundle-blurb {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Buttons */
+button {
+  background-color: #ff875c;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff7043;
+}
+
+/* Hover Preview (Optional) */
+.hover-preview img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+}
+
+.hover-content {
+  display: none;
+}
+
+.hover-preview:hover .hover-content {
+  display: block;
+  background-color: #fff8f2;
+  padding: 0.75rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fffefc;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Sip Station Section */
+#sip-station {
+  padding: 3rem 1.5rem;
+  background-color: #fffefc;
+  text-align: center;
+}
+
+#sip-station h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.smoothie-sips-container h3,
+.alt-sips-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+/* Smoothie & Alt Sip Cards */
+.flavor-card.smoothie-sip {
+  background-color: #fff0f5;
+  border-left: 6px solid #ff6a3d;
+}
+
+.flavor-card.alt-sip {
+  background-color: #f2f9ff;
+  border-left: 6px solid #007b5e;
+}
+/* Add-On Grid Layout */
+.addon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Hover Lift Effect */
+.addon-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Behavior */
+@media (max-width: 600px) {
+  .addon-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
