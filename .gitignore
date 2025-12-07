@@ -1,0 +1,32 @@
+# Node / React
+node_modules/
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / Editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.github/
+
+# Windows profile clutter
+AppData/
+Documents/
+Downloads/
+Music/
+Videos/
+Saved Games/
+Contacts/
+Links/
+Favorites/
+Searches/
+NTUSER.*
+
+# PowerShell artifacts
+*.ps1.rtf
