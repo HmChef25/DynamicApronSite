@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/DynamicApronSite/static/css/main.e66e6c1c.css",
-    "main.js": "/DynamicApronSite/static/js/main.6d6e173f.js",
-    "index.html": "/DynamicApronSite/index.html",
-    "main.e66e6c1c.css.map": "/DynamicApronSite/static/css/main.e66e6c1c.css.map",
-    "main.6d6e173f.js.map": "/DynamicApronSite/static/js/main.6d6e173f.js.map"
+    "main.css": "/static/css/main.e66e6c1c.css",
+    "main.js": "/static/js/main.6d6e173f.js",
+    "index.html": "/index.html",
+    "main.e66e6c1c.css.map": "/static/css/main.e66e6c1c.css.map",
+    "main.6d6e173f.js.map": "/static/js/main.6d6e173f.js.map"
   },
   "entrypoints": [
     "static/css/main.e66e6c1c.css",
