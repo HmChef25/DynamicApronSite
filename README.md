@@ -31,4 +31,4 @@ Dynamic Apron is deployed using modern hosting platforms that integrate directly
 ### GitHub Pages (Optional / Backup)
 - Build the app locally:
   ```bash
-  npm run build
+  npm run buildtrigger build
