@@ -14,7 +14,7 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .github/
-
+!.github/workflows/
 # Windows profile clutter
 AppData/
 OneDrive/
