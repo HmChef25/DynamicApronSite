@@ -1,0 +1,45 @@
+.bundle-builder {
+  padding: 2rem;
+  background-color: #fefefe;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bundle-builder h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.bundle-builder h3 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.bundle-summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.bundle-summary p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.bundle-summary h3 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #0077cc;
+}
