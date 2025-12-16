@@ -1,19 +1,34 @@
-const pricingTiers = [
-  {
-    name: 'Starter',
-    price: 49,
-    perks: ['3 meals/week', '1 mocktail add-on', 'Free delivery'],
+const pricingData = {
+  bundles: {
+    standard: 29.99,
+    premium: 49.99,
+    family: 89.99
   },
-  {
-    name: 'Pro',
-    price: 89,
-    perks: ['5 meals/week', '2 mocktail add-ons', 'Priority support'],
+  addOns: {
+    mocktail: 5.99,
+    dessert: 7.99
   },
-  {
-    name: 'Elite',
-    price: 129,
-    perks: ['7 meals/week', 'Unlimited mocktails', 'Exclusive recipes'],
-  },
-];
+  discounts: {
+    batch5: 0.9,
+    partner: 0.85,
+    subscription: {
+      basic: 1.0,
+      premium: 0.95,
+      family: 0.9
+    }
+  }
+};
 
-export default pricingTiers;
+export function calculateTotal(order, tier = null, isPartner = false) {
+  let subtotal = order.reduce((sum, item) => sum + pricingData.bundles[item], 0);
+
+  if (order.length >= 5) subtotal *= pricingData.discounts.batch5;
+  if (isPartner) subtotal *= pricingData.discounts.partner;
+  if (tier && pricingData.discounts.subscription[tier]) {
+    subtotal *= pricingData.discounts.subscription[tier];
+  }
+
+  return subtotal.toFixed(2);
+}
+
+export default pricingData;

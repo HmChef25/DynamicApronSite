@@ -1,24 +1,12 @@
 import React from 'react';
-import PromoBanner from './PromoBanner';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import MocktailGallery from './MocktailGallery';
-import BundleBuilder from './BundleBuilder';
-import ContactForm from './ContactForm';
-import Footer from './Footer';
+import { Link } from 'react-router-dom';
 
-function HomePage() {
+export default function HomePage() {
   return (
-    <div className="App">
-      <PromoBanner />
-      <Navbar />
-      <Hero />
-      <MocktailGallery />
-      <BundleBuilder />
-      <ContactForm />
-      <Footer />
+    <div style={{ padding: '2rem' }}>
+      <h1>Welcome to Dynamic Apron</h1>
+      <p>Your Mediterranean-inspired meal prep experience starts here.</p>
+      <Link to="/bundle">Go to Bundle Builder</Link>
     </div>
   );
 }
-
-export default HomePage;
