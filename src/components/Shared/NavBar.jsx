@@ -1,14 +1,42 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-export default function NavBar() {
+function NavBar() {
   return (
-    <nav style={{ padding: "1rem", backgroundColor: "#f0f0f0" }}>
-      <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
-      <Link to="/culinary" style={{ marginRight: "1rem" }}>Culinary</Link>
-      <Link to="/service" style={{ marginRight: "1rem" }}>Service</Link>
-      <Link to="/operations" style={{ marginRight: "1rem" }}>Operations</Link>
-      <Link to="/bundle">Bundle Builder</Link>
+    <nav style={styles.nav}>
+      <div style={styles.logo}>Dynamic Apron</div>
+      <div style={styles.links}>
+        <Link to="/" style={styles.link}>Home</Link>
+        <Link to="/culinary" style={styles.link}>Culinary</Link>
+        <Link to="/service" style={styles.link}>Service</Link>
+        <Link to="/operations" style={styles.link}>Operations</Link>
+        <Link to="/bundle" style={styles.link}>Bundle</Link>
+      </div>
     </nav>
   );
 }
+
+const styles = {
+  nav: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "1rem 2rem",
+    background: "#111",
+    color: "#fff",
+  },
+  logo: {
+    fontSize: "1.25rem",
+    fontWeight: "600",
+  },
+  links: {
+    display: "flex",
+    gap: "1.5rem",
+  },
+  link: {
+    color: "#fff",
+    textDecoration: "none",
+    fontSize: "1rem",
+  },
+};
+
+export default NavBar;
