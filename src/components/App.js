@@ -1,15 +1,28 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import BundleBuilder from './pages/BundleBuilder';
+// src/App.jsx
+import React from "react";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Culinary from "./pages/Culinary";
+import Service from "./pages/Service";
+import Operations from "./pages/Operations";
+import BundleBuilder from "./pages/BundleBuilder";
+import NavBar from "./components/Shared/NavBar";
 
-export default function App() {
+function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/culinary" element={<Culinary />} />
+        <Route path="/service" element={<Service />} />
+        <Route path="/operations" element={<Operations />} />
         <Route path="/bundle" element={<BundleBuilder />} />
+        {/* fallback route */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   );
 }
+
+export default App;
