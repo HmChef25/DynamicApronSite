@@ -1,22 +1,9 @@
-import NavBar from "./NavBar";
-
-function Layout({ children }) {
-  return (
-    <div style={styles.container}>
-      <NavBar />
-      <main style={styles.main}>{children}</main>
-      <footer style={styles.footer}>
-        Dynamic Apron © {new Date().getFullYear()}
-      </footer>
-    </div>
-  );
-}
-
 const styles = {
   container: {
     minHeight: "100vh",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    background: "#F1FAEE"
   },
   main: {
     flex: 1,
@@ -27,10 +14,8 @@ const styles = {
   footer: {
     padding: "1rem",
     textAlign: "center",
-    background: "#111",
-    color: "#fff",
+    background: "#1D3557",
+    color: "#F1FAEE",
     marginTop: "2rem"
   }
 };
-
-export default Layout;
