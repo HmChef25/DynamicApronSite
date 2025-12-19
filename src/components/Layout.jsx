@@ -1,3 +1,15 @@
+import NavBar from "./NavBar";
+
+export default function Layout({ children }) {
+  return (
+    <div style={styles.container}>
+      <NavBar />
+      <main style={styles.main}>{children}</main>
+      <footer style={styles.footer}>Dynamic Apron OS © {new Date().getFullYear()}</footer>
+    </div>
+  );
+}
+
 const styles = {
   container: {
     minHeight: "100vh",
