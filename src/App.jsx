@@ -13,8 +13,12 @@ import Yields from "./pages/Culinary/Yields";
 import Ingredients from "./pages/Culinary/Ingredients";
 import RecipeFramework from "./pages/Culinary/RecipeFramework";
 
-import ServiceDashboard from "./pages/Service/ServiceDashboard";
 import GuiltyFork from "./pages/Service/GuiltyFork";
+
+import BinderHome from "./pages/Binder/BinderHome";
+import CulinaryIndex from "./pages/Binder/CulinaryIndex";
+import ServiceIndex from "./pages/Binder/ServiceIndex";
+import OperationsIndex from "./pages/Binder/OperationsIndex";
 
 function App() {
   return (
@@ -34,6 +38,12 @@ function App() {
           {/* Service Module */}
           <Route path="/service" element={<Service />} />
           <Route path="/service/guiltyfork" element={<GuiltyFork />} />
+
+          {/* Binder System */}
+          <Route path="/binder" element={<BinderHome />} />
+          <Route path="/binder/culinary" element={<CulinaryIndex />} />
+          <Route path="/binder/service" element={<ServiceIndex />} />
+          <Route path="/binder/operations" element={<OperationsIndex />} />
 
           {/* Other Pages */}
           <Route path="/operations" element={<Operations />} />
