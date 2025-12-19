@@ -1,0 +1,17 @@
+/* Hide desktop links on small screens */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .nav-mobile-toggle {
+    display: flex !important;
+  }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 769px) {
+  .nav-mobile-toggle {
+    display: none !important;
+  }
+}
