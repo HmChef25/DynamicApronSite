@@ -1,6 +1,10 @@
-/* Hide desktop links on small screens */
+/* Hide desktop links + search bar on small screens */
 @media (max-width: 768px) {
   .nav-desktop {
+    display: none !important;
+  }
+
+  .nav-search {
     display: none !important;
   }
 

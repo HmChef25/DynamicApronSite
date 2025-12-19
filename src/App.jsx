@@ -1,20 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 
+// Home + Modules Overview
 import Home from "./pages/Home";
-import Culinary from "./pages/Culinary";
-import Service from "./pages/Service";
-import Bundle from "./pages/Bundle";
+import ModulesOverview from "./pages/ModulesOverview";
 
-// Culinary Subpages
+// Culinary Module
+import Culinary from "./pages/Culinary";
 import BatchLogic from "./pages/Culinary/BatchLogic";
 import Pricing from "./pages/Culinary/Pricing";
 import Yields from "./pages/Culinary/Yields";
 import Ingredients from "./pages/Culinary/Ingredients";
 import RecipeFramework from "./pages/Culinary/RecipeFramework";
 
-// Service Subpages
+// Service Module
+import Service from "./pages/Service";
 import GuiltyFork from "./pages/Service/GuiltyFork";
+
+// Operations Module
+import OperationsDashboard from "./pages/Operations/OperationsDashboard";
+import Checklists from "./pages/Operations/Checklists";
+import Admin from "./pages/Operations/Admin";
+import Systems from "./pages/Operations/Systems";
 
 // Binder System
 import BinderHome from "./pages/Binder/BinderHome";
@@ -22,11 +29,8 @@ import CulinaryIndex from "./pages/Binder/CulinaryIndex";
 import ServiceIndex from "./pages/Binder/ServiceIndex";
 import OperationsIndex from "./pages/Binder/OperationsIndex";
 
-// Operations Module
-import OperationsDashboard from "./pages/Operations/OperationsDashboard";
-import Checklists from "./pages/Operations/Checklists";
-import Admin from "./pages/Operations/Admin";
-import Systems from "./pages/Operations/Systems";
+// Bundle Builder
+import Bundle from "./pages/Bundle";
 
 function App() {
   return (
@@ -36,6 +40,9 @@ function App() {
 
           {/* Home */}
           <Route path="/" element={<Home />} />
+
+          {/* Modules Overview */}
+          <Route path="/modules" element={<ModulesOverview />} />
 
           {/* Culinary Module */}
           <Route path="/culinary" element={<Culinary />} />
@@ -49,17 +56,17 @@ function App() {
           <Route path="/service" element={<Service />} />
           <Route path="/service/guiltyfork" element={<GuiltyFork />} />
 
-          {/* Binder System */}
-          <Route path="/binder" element={<BinderHome />} />
-          <Route path="/binder/culinary" element={<CulinaryIndex />} />
-          <Route path="/binder/service" element={<ServiceIndex />} />
-          <Route path="/binder/operations" element={<OperationsIndex />} />
-
           {/* Operations Module */}
           <Route path="/operations" element={<OperationsDashboard />} />
           <Route path="/operations/checklists" element={<Checklists />} />
           <Route path="/operations/admin" element={<Admin />} />
           <Route path="/operations/systems" element={<Systems />} />
+
+          {/* Binder System */}
+          <Route path="/binder" element={<BinderHome />} />
+          <Route path="/binder/culinary" element={<CulinaryIndex />} />
+          <Route path="/binder/service" element={<ServiceIndex />} />
+          <Route path="/binder/operations" element={<OperationsIndex />} />
 
           {/* Bundle Builder */}
           <Route path="/bundle" element={<Bundle />} />
