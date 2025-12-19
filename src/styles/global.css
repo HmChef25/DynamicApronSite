@@ -1,20 +1,32 @@
-/* Hide desktop links + search bar on small screens */
+/* ================================
+   MOBILE (≤ 768px)
+   Hide desktop UI, show hamburger
+================================ */
 @media (max-width: 768px) {
+
+  /* Hide desktop navigation links */
   .nav-desktop {
     display: none !important;
   }
 
+  /* Hide search bar on mobile */
   .nav-search {
     display: none !important;
   }
 
+  /* Show hamburger menu */
   .nav-mobile-toggle {
     display: flex !important;
   }
 }
 
-/* Hide hamburger on desktop */
+/* ================================
+   DESKTOP (≥ 769px)
+   Hide hamburger, show full nav
+================================ */
 @media (min-width: 769px) {
+
+  /* Hide hamburger on desktop */
   .nav-mobile-toggle {
     display: none !important;
   }
