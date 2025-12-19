@@ -1,19 +1,30 @@
-import { Link } from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
 
 export default function OperationsDashboard() {
-  return (
-    <div>
-      <h1>Operations Module</h1>
-      <p>
-        This dashboard provides access to Dynamic Apron’s operational systems,
-        checklists, admin workflows, and structural processes.
-      </p>
+  const links = [
+    { label: "Checklists", to: "/operations/checklists" },
+    { label: "Admin Workflows", to: "/operations/admin" },
+    { label: "Operational Systems", to: "/operations/systems" }
+  ];
 
-      <ul>
-        <li><Link to="/operations/checklists">Checklists</Link></li>
-        <li><Link to="/operations/admin">Admin Workflows</Link></li>
-        <li><Link to="/operations/systems">Operational Systems</Link></li>
-      </ul>
+  return (
+    <div style={styles.container}>
+      <Sidebar title="Operations" links={links} />
+
+      <div style={styles.content}>
+        <h1>Operations Dashboard</h1>
+        <p>Welcome to the Operations Module. Choose a system from the sidebar.</p>
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    display: "flex"
+  },
+  content: {
+    flex: 1,
+    padding: "2rem"
+  }
+};

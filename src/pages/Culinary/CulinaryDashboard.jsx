@@ -1,22 +1,32 @@
-import { Link } from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
 
 export default function CulinaryDashboard() {
-  return (
-    <div>
-      <h1>Culinary Module</h1>
-      <p>
-        This dashboard provides access to Dynamic Apron’s core culinary systems,
-        including batch logic, transparent pricing, yield structures, ingredient
-        modules, and recipe frameworks.
-      </p>
+  const links = [
+    { label: "Batch Logic", to: "/culinary/batch" },
+    { label: "Pricing", to: "/culinary/pricing" },
+    { label: "Yields", to: "/culinary/yields" },
+    { label: "Ingredients", to: "/culinary/ingredients" },
+    { label: "Recipe Framework", to: "/culinary/framework" }
+  ];
 
-      <ul>
-        <li><Link to="/culinary/batch">Batch Logic</Link></li>
-        <li><Link to="/culinary/pricing">Transparent Pricing</Link></li>
-        <li><Link to="/culinary/yields">Yield Tables</Link></li>
-        <li><Link to="/culinary/ingredients">Ingredient Modules</Link></li>
-        <li><Link to="/culinary/framework">Recipe Framework</Link></li>
-      </ul>
+  return (
+    <div style={styles.container}>
+      <Sidebar title="Culinary Systems" links={links} />
+
+      <div style={styles.content}>
+        <h1>Culinary Dashboard</h1>
+        <p>Welcome to the Culinary Module. Choose a system from the sidebar.</p>
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    display: "flex"
+  },
+  content: {
+    flex: 1,
+    padding: "2rem"
+  }
+};
