@@ -1,11 +1,20 @@
+import { useState } from "react";
 import NavBar from "./NavBar";
+import Sidebar from "./Sidebar";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function Layout({ children }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div style={styles.container}>
-      <NavBar />
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} />
 
+      {/* NavBar with sidebar toggle */}
+      <NavBar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+
+      {/* Main Content */}
       <main style={styles.main}>
         <div style={styles.inner}>
           <Breadcrumbs />
@@ -13,6 +22,7 @@ export default function Layout({ children }) {
         </div>
       </main>
 
+      {/* Footer */}
       <footer style={styles.footer}>
         Dynamic Apron OS © {new Date().getFullYear()}
       </footer>
@@ -33,6 +43,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     padding: "2rem 1.5rem",
+    marginLeft: "230px", // ✅ shifts content right on desktop
   },
 
   inner: {
