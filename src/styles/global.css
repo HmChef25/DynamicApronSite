@@ -1,33 +1,160 @@
-/* ================================
-   MOBILE (≤ 768px)
-   Hide desktop UI, show hamburger
-================================ */
+/* =========================================
+   GLOBAL RESET & BASE STYLES
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #F1FAEE;
+  color: #1D3557;
+  line-height: 1.5;
+}
+
+/* Smooth fade for page transitions */
+.page-fade {
+  animation: pageFade 0.25s ease-out;
+}
+
+@keyframes pageFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* =========================================
+   NAVIGATION (DESKTOP + MOBILE)
+========================================= */
+
+/* Desktop nav links */
+.nav-desktop {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Hamburger (hidden on desktop by default) */
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   RESPONSIVE NAVIGATION
+========================================= */
+
+/* MOBILE (≤ 768px) */
 @media (max-width: 768px) {
 
-  /* Hide desktop navigation links */
+  /* Hide desktop links */
   .nav-desktop {
     display: none !important;
   }
 
-  /* Hide search bar on mobile */
+  /* Hide search bar if you add one later */
   .nav-search {
     display: none !important;
   }
 
-  /* Show hamburger menu */
+  /* Show hamburger */
   .nav-mobile-toggle {
     display: flex !important;
   }
 }
 
-/* ================================
-   DESKTOP (≥ 769px)
-   Hide hamburger, show full nav
-================================ */
+/* DESKTOP (≥ 769px) */
 @media (min-width: 769px) {
 
-  /* Hide hamburger on desktop */
+  /* Hide hamburger */
   .nav-mobile-toggle {
     display: none !important;
   }
+}
+
+
+/* =========================================
+   SIDEBAR (DESKTOP + MOBILE)
+========================================= */
+
+.sidebar {
+  width: 230px;
+  background: #1D3557;
+  color: #F1FAEE;
+  padding: 1.5rem 1rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: transform 0.25s ease-out;
+  z-index: 999;
+}
+
+/* MOBILE SIDEBAR — slide-in */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* DESKTOP SIDEBAR — always visible */
+@media (min-width: 769px) {
+  .sidebar {
+    transform: none;
+    position: fixed;
+  }
+}
+
+
+/* =========================================
+   SEARCH DROPDOWN (OPTIONAL)
+========================================= */
+
+.search-dropdown {
+  position: absolute;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 0.75rem;
+  width: 300px;
+  z-index: 1000;
+}
+
+/* Mobile: full-width dropdown */
+@media (max-width: 768px) {
+  .search-dropdown {
+    width: 100%;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0;
+    animation: fadeIn 0.15s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* =========================================
+   UTILITY CLASSES
+========================================= */
+
+.hidden {
+  display: none !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,38 +1,33 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import MobileMenu from "./MobileMenu";
 
-function NavBar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+export default function NavBar({ onToggleSidebar }) {
   return (
-    <>
-      <nav style={styles.nav}>
-        {/* Logo */}
-        <div style={styles.logo}>Dynamic Apron</div>
+    <nav style={styles.nav}>
+      {/* Logo */}
+      <div style={styles.logo}>
+        <Link to="/" style={styles.logoLink}>Dynamic Apron</Link>
+      </div>
 
-        {/* Desktop Navigation */}
-        <div className="nav-desktop" style={styles.links}>
-          <Link to="/" style={styles.link}>Home</Link>
-          <Link to="/culinary" style={styles.link}>Culinary</Link>
-          <Link to="/service" style={styles.link}>Service</Link>
-          <Link to="/operations" style={styles.link}>Operations</Link>
-          <Link to="/bundle" style={styles.link}>Bundle</Link>
-        </div>
+      {/* Desktop Links */}
+      <div className="nav-desktop" style={styles.links}>
+        <Link to="/culinary" style={styles.link}>Culinary</Link>
+        <Link to="/service" style={styles.link}>Service</Link>
+        <Link to="/operations" style={styles.link}>Operations</Link>
+        <Link to="/binder" style={styles.link}>Binder</Link>
+        <Link to="/bundle" style={styles.link}>Bundles</Link>
+      </div>
 
-        {/* Mobile Hamburger */}
-        <div
-          className="nav-mobile-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={styles.hamburger}
-        >
-          ☰
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-    </>
+      {/* Mobile Hamburger */}
+      <div
+        className="nav-mobile-toggle"
+        style={styles.hamburger}
+        onClick={onToggleSidebar}
+      >
+        <div style={styles.bar}></div>
+        <div style={styles.bar}></div>
+        <div style={styles.bar}></div>
+      </div>
+    </nav>
   );
 }
 
@@ -44,36 +39,38 @@ const styles = {
     padding: "1rem 2rem",
     background: "#1D3557",
     color: "#F1FAEE",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
     position: "sticky",
     top: 0,
     zIndex: 1000,
   },
-
   logo: {
     fontSize: "1.4rem",
-    fontWeight: 700,
-    letterSpacing: "0.5px",
-    color: "#F1FAEE",
+    fontWeight: "bold",
   },
-
+  logoLink: {
+    color: "#F1FAEE",
+    textDecoration: "none",
+  },
   links: {
     display: "flex",
     gap: "1.5rem",
   },
-
   link: {
-    color: "#F1FAEE",
+    color: "#A8DADC",
     textDecoration: "none",
     fontSize: "1rem",
     fontWeight: 500,
   },
-
   hamburger: {
-    fontSize: "1.8rem",
-    color: "#F1FAEE",
+    display: "none",
+    flexDirection: "column",
+    gap: "5px",
     cursor: "pointer",
-    display: "none", // CSS media queries will override this
+  },
+  bar: {
+    width: "25px",
+    height: "3px",
+    background: "#F1FAEE",
   },
 };
-
-export default NavBar;

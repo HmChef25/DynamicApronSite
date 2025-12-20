@@ -37,20 +37,17 @@ const styles = {
     flexDirection: "column",
     background: "#F1FAEE",
   },
-
   main: {
     flex: 1,
     display: "flex",
     justifyContent: "center",
     padding: "2rem 1.5rem",
-    marginLeft: "230px", // ✅ shifts content right on desktop
+    marginLeft: "230px", // shifts content right on desktop
   },
-
   inner: {
     width: "100%",
     maxWidth: "1100px",
   },
-
   footer: {
     padding: "1rem",
     textAlign: "center",
