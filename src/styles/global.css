@@ -1,6 +1,36 @@
 /* =========================================
+   THEME VARIABLES
+========================================= */
+
+:root {
+  --bg: #F1FAEE;
+  --text: #1D3557;
+  --sidebar-bg: #1D3557;
+  --sidebar-text: #F1FAEE;
+  --accent: #A8DADC;
+  --tooltip-bg: #1D3557;
+  --tooltip-text: #F1FAEE;
+}
+
+[data-theme="dark"] {
+  --bg: #0B132B;
+  --text: #E0E6F0;
+  --sidebar-bg: #1C2541;
+  --sidebar-text: #E0E6F0;
+  --accent: #5BC0BE;
+  --tooltip-bg: #1C2541;
+  --tooltip-text: #E0E6F0;
+}
+
+/* Smooth theme transitions */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* =========================================
    GLOBAL RESET & BASE STYLES
 ========================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +39,8 @@
 
 body {
   font-family: system-ui, sans-serif;
-  background: #F1FAEE;
-  color: #1D3557;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.5;
 }
 
@@ -24,18 +54,15 @@ body {
   to { opacity: 1; }
 }
 
-
 /* =========================================
    NAVIGATION (DESKTOP + MOBILE)
 ========================================= */
 
-/* Desktop nav links */
 .nav-desktop {
   display: flex;
   gap: 1.5rem;
 }
 
-/* Hamburger (hidden on desktop by default) */
 .nav-mobile-toggle {
   display: none;
   flex-direction: column;
@@ -43,53 +70,42 @@ body {
   cursor: pointer;
 }
 
-
 /* =========================================
    RESPONSIVE NAVIGATION
 ========================================= */
 
-/* MOBILE (≤ 768px) */
 @media (max-width: 768px) {
-
-  /* Hide desktop links */
   .nav-desktop {
     display: none !important;
   }
 
-  /* Hide search bar if added later */
   .nav-search {
     display: none !important;
   }
 
-  /* Show hamburger */
   .nav-mobile-toggle {
     display: flex !important;
   }
 }
 
-/* DESKTOP (≥ 769px) */
 @media (min-width: 769px) {
-
-  /* Hide hamburger */
   .nav-mobile-toggle {
     display: none !important;
   }
 
-  /* Hover-expand sidebar */
   .sidebar:hover {
     width: 230px !important;
   }
 }
 
-
 /* =========================================
-   SIDEBAR (DESKTOP + MOBILE)
+   SIDEBAR
 ========================================= */
 
 .sidebar {
   width: 230px;
-  background: #1D3557;
-  color: #F1FAEE;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
   padding: 1.5rem 1rem;
   height: 100vh;
   position: fixed;
@@ -100,7 +116,6 @@ body {
   z-index: 999;
 }
 
-/* Smooth label fade */
 .sidebar span {
   transition: opacity 0.2s ease;
 }
@@ -109,7 +124,7 @@ body {
   opacity: 0;
 }
 
-/* MOBILE SIDEBAR — slide-in */
+/* MOBILE SIDEBAR */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -119,7 +134,7 @@ body {
   }
 }
 
-/* DESKTOP SIDEBAR — always visible */
+/* DESKTOP SIDEBAR */
 @media (min-width: 769px) {
   .sidebar {
     transform: none;
@@ -127,9 +142,8 @@ body {
   }
 }
 
-
 /* =========================================
-   SIDEBAR TOOLTIP STYLES
+   TOOLTIP SYSTEM
 ========================================= */
 
 .tooltip-wrapper {
@@ -141,8 +155,8 @@ body {
   left: 80px;
   top: 50%;
   transform: translateY(-50%);
-  background: #1D3557;
-  color: #F1FAEE;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
   padding: 6px 10px;
   border-radius: 6px;
   white-space: nowrap;
@@ -154,52 +168,18 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-/* Show tooltip only when collapsed */
 .sidebar.collapsed .sidebar-tooltip {
   opacity: 1;
 }
 
-/* Hide tooltip when sidebar expands on hover */
 @media (min-width: 769px) {
   .sidebar:hover .sidebar-tooltip {
     opacity: 0;
   }
 }
 
-
 /* =========================================
-   SEARCH DROPDOWN (OPTIONAL)
-========================================= */
-
-.search-dropdown {
-  position: absolute;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  padding: 0.75rem;
-  width: 300px;
-  z-index: 1000;
-}
-
-/* Mobile: full-width dropdown */
-@media (max-width: 768px) {
-  .search-dropdown {
-    width: 100%;
-    left: 0 !important;
-    right: 0 !important;
-    border-radius: 0;
-    animation: fadeIn 0.15s ease-out;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* =========================================
-   UTILITY CLASSES
+   UTILITY
 ========================================= */
 
 .hidden {

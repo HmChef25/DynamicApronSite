@@ -1,8 +1,16 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-export default function NavBar() {
-  const [open, setOpen] = useState(false);
+export default function NavBar({ onToggleSidebar }) {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   return (
     <nav style={styles.nav}>
@@ -10,8 +18,7 @@ export default function NavBar() {
         <Link to="/" style={styles.logoLink}>Dynamic Apron</Link>
       </div>
 
-      {/* Desktop Links */}
-      <div style={styles.links} className="nav-desktop">
+      <div className="nav-desktop" style={styles.links}>
         <Link to="/culinary" style={styles.link}>Culinary</Link>
         <Link to="/service" style={styles.link}>Service</Link>
         <Link to="/operations" style={styles.link}>Operations</Link>
@@ -19,27 +26,19 @@ export default function NavBar() {
         <Link to="/bundle" style={styles.link}>Bundles</Link>
       </div>
 
-      {/* Mobile Hamburger */}
+      <button onClick={toggleTheme} style={styles.themeButton}>
+        {theme === "light" ? "🌙" : "☀️"}
+      </button>
+
       <div
         className="nav-mobile-toggle"
         style={styles.hamburger}
-        onClick={() => setOpen(!open)}
+        onClick={onToggleSidebar}
       >
         <div style={styles.bar}></div>
         <div style={styles.bar}></div>
         <div style={styles.bar}></div>
       </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="nav-mobile-menu" style={styles.mobileMenu}>
-          <Link to="/culinary" style={styles.mobileLink} onClick={() => setOpen(false)}>Culinary</Link>
-          <Link to="/service" style={styles.mobileLink} onClick={() => setOpen(false)}>Service</Link>
-          <Link to="/operations" style={styles.mobileLink} onClick={() => setOpen(false)}>Operations</Link>
-          <Link to="/binder" style={styles.mobileLink} onClick={() => setOpen(false)}>Binder</Link>
-          <Link to="/bundle" style={styles.mobileLink} onClick={() => setOpen(false)}>Bundles</Link>
-        </div>
-      )}
     </nav>
   );
 }
@@ -50,59 +49,48 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "1rem 2rem",
-    background: "#1D3557",
-    color: "#F1FAEE",
+    background: "var(--sidebar-bg)",
+    color: "var(--sidebar-text)",
     boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
     position: "sticky",
     top: 0,
-    zIndex: 1000
+    zIndex: 1000,
   },
   logo: {
     fontSize: "1.4rem",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   logoLink: {
-    color: "#F1FAEE",
-    textDecoration: "none"
+    color: "var(--sidebar-text)",
+    textDecoration: "none",
   },
   links: {
     display: "flex",
-    gap: "1.5rem"
+    gap: "1.5rem",
   },
   link: {
-    color: "#A8DADC",
+    color: "var(--accent)",
     textDecoration: "none",
     fontSize: "1rem",
-    fontWeight: 500
+    fontWeight: 500,
+  },
+  themeButton: {
+    background: "transparent",
+    border: "none",
+    color: "var(--sidebar-text)",
+    fontSize: "1.3rem",
+    cursor: "pointer",
+    marginRight: "1rem",
   },
   hamburger: {
     display: "none",
     flexDirection: "column",
     gap: "5px",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   bar: {
     width: "25px",
     height: "3px",
-    background: "#F1FAEE"
+    background: "var(--sidebar-text)",
   },
-  mobileMenu: {
-    position: "absolute",
-    top: "70px",
-    right: "0",
-    background: "#1D3557",
-    width: "100%",
-    padding: "1rem 0",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-    textAlign: "center",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.2)"
-  },
-  mobileLink: {
-    color: "#A8DADC",
-    textDecoration: "none",
-    fontSize: "1.2rem",
-    padding: "0.5rem 0"
-  }
 };

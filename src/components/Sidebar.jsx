@@ -23,10 +23,9 @@ function Tooltip({ label, collapsed }) {
 export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
   const location = useLocation();
 
-  const activeColor = "#A8DADC";
-  const inactiveColor = "#F1FAEE";
+  const activeColor = "var(--accent)";
+  const inactiveColor = "var(--sidebar-text)";
 
-  /* Hover-expand logic */
   const handleMouseEnter = () => {
     if (collapsed) onToggleCollapse();
   };
@@ -45,7 +44,6 @@ export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Collapse Toggle */}
       <button onClick={onToggleCollapse} style={styles.collapseButton}>
         {collapsed ? "›" : "‹"}
       </button>
@@ -162,8 +160,8 @@ export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
 const styles = {
   sidebar: {
     width: "230px",
-    background: "#1D3557",
-    color: "#F1FAEE",
+    background: "var(--sidebar-bg)",
+    color: "var(--sidebar-text)",
     padding: "1.5rem 1rem",
     height: "100vh",
     position: "fixed",
@@ -183,7 +181,7 @@ const styles = {
   collapseButton: {
     background: "transparent",
     border: "none",
-    color: "#F1FAEE",
+    color: "var(--sidebar-text)",
     cursor: "pointer",
     fontSize: "1.2rem",
     marginBottom: "1.5rem",
@@ -200,7 +198,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "0.75rem",
-    color: "#F1FAEE",
+    color: "var(--sidebar-text)",
     textDecoration: "none",
     fontSize: "1.05rem",
     padding: "0.5rem 0.25rem",

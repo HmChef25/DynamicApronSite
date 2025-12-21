@@ -4,33 +4,29 @@ import Sidebar from "./Sidebar";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);      // mobile slide-in
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // desktop collapse
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Detect mobile width (simple + effective)
   const isMobile = window.innerWidth <= 768;
 
   return (
     <div style={styles.container}>
-      {/* Sidebar */}
       <Sidebar
         isOpen={sidebarOpen}
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
       />
 
-      {/* NavBar with sidebar toggle */}
       <NavBar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-      {/* Main Content */}
       <main
         style={{
           ...styles.main,
           marginLeft: isMobile
-            ? "0px" // mobile: no margin
+            ? "0px"
             : sidebarCollapsed
-            ? "70px" // desktop collapsed
-            : "230px", // desktop full
+            ? "70px"
+            : "230px",
         }}
       >
         <div style={styles.inner}>
@@ -39,7 +35,6 @@ export default function Layout({ children }) {
         </div>
       </main>
 
-      {/* Footer */}
       <footer style={styles.footer}>
         Dynamic Apron OS © {new Date().getFullYear()}
       </footer>
@@ -52,7 +47,7 @@ const styles = {
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
-    background: "#F1FAEE",
+    background: "var(--bg)",
   },
   main: {
     flex: 1,
@@ -68,8 +63,8 @@ const styles = {
   footer: {
     padding: "1rem",
     textAlign: "center",
-    background: "#1D3557",
-    color: "#F1FAEE",
+    background: "var(--sidebar-bg)",
+    color: "var(--sidebar-text)",
     fontSize: "0.9rem",
     marginTop: "2rem",
   },
