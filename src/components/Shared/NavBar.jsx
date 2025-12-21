@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function NavBar({ onToggleSidebar }) {
+  const location = useLocation();
+
   return (
     <nav style={styles.nav}>
       {/* Logo */}
@@ -10,11 +12,55 @@ export default function NavBar({ onToggleSidebar }) {
 
       {/* Desktop Links */}
       <div className="nav-desktop" style={styles.links}>
-        <Link to="/culinary" style={styles.link}>Culinary</Link>
-        <Link to="/service" style={styles.link}>Service</Link>
-        <Link to="/operations" style={styles.link}>Operations</Link>
-        <Link to="/binder" style={styles.link}>Binder</Link>
-        <Link to="/bundle" style={styles.link}>Bundles</Link>
+        <Link
+          to="/culinary"
+          style={{
+            ...styles.link,
+            ...(location.pathname === "/culinary" ? styles.activeLink : {})
+          }}
+        >
+          Culinary
+        </Link>
+
+        <Link
+          to="/service"
+          style={{
+            ...styles.link,
+            ...(location.pathname === "/service" ? styles.activeLink : {})
+          }}
+        >
+          Service
+        </Link>
+
+        <Link
+          to="/operations"
+          style={{
+            ...styles.link,
+            ...(location.pathname === "/operations" ? styles.activeLink : {})
+          }}
+        >
+          Operations
+        </Link>
+
+        <Link
+          to="/binder"
+          style={{
+            ...styles.link,
+            ...(location.pathname === "/binder" ? styles.activeLink : {})
+          }}
+        >
+          Binder
+        </Link>
+
+        <Link
+          to="/bundle"
+          style={{
+            ...styles.link,
+            ...(location.pathname === "/bundle" ? styles.activeLink : {})
+          }}
+        >
+          Bundles
+        </Link>
       </div>
 
       {/* Mobile Hamburger */}
@@ -61,6 +107,14 @@ const styles = {
     textDecoration: "none",
     fontSize: "1rem",
     fontWeight: 500,
+    padding: "0.25rem 0.5rem",
+    borderRadius: "4px",
+    transition: "background 0.2s ease",
+  },
+  activeLink: {
+    background: "rgba(255, 255, 255, 0.15)",
+    color: "#F1FAEE",
+    fontWeight: "600",
   },
   hamburger: {
     display: "none",

@@ -7,6 +7,9 @@ export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);      // mobile slide-in
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // desktop collapse
 
+  // Detect mobile width (simple + effective)
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div style={styles.container}>
       {/* Sidebar */}
@@ -23,7 +26,11 @@ export default function Layout({ children }) {
       <main
         style={{
           ...styles.main,
-          marginLeft: sidebarCollapsed ? "70px" : "230px", // responsive to collapse
+          marginLeft: isMobile
+            ? "0px" // mobile: no margin
+            : sidebarCollapsed
+            ? "70px" // desktop collapsed
+            : "230px", // desktop full
         }}
       >
         <div style={styles.inner}>
@@ -52,6 +59,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     padding: "2rem 1.5rem",
+    transition: "margin-left 0.25s ease-out",
   },
   inner: {
     width: "100%",
