@@ -5,10 +5,28 @@ import GearIcon from "../icons/GearIcon";
 import BookIcon from "../icons/BookIcon";
 import LayersIcon from "../icons/LayersIcon";
 
+/* Tooltip Component */
+function Tooltip({ label, collapsed }) {
+  return (
+    <div
+      className="sidebar-tooltip"
+      style={{
+        opacity: collapsed ? 1 : 0,
+        pointerEvents: "none",
+      }}
+    >
+      {label}
+    </div>
+  );
+}
+
 export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
   const location = useLocation();
 
-  // Hover-expand logic
+  const activeColor = "#A8DADC";
+  const inactiveColor = "#F1FAEE";
+
+  /* Hover-expand logic */
   const handleMouseEnter = () => {
     if (collapsed) onToggleCollapse();
   };
@@ -19,7 +37,7 @@ export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
 
   return (
     <aside
-      className={`sidebar ${isOpen ? "open" : ""}`}
+      className={`sidebar ${isOpen ? "open" : ""} ${collapsed ? "collapsed" : ""}`}
       style={{
         ...styles.sidebar,
         ...(collapsed ? styles.collapsed : {}),
@@ -35,76 +53,106 @@ export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
       <div style={styles.section}>
 
         {/* HOME */}
-        <Link
-          to="/"
-          style={{
-            ...styles.link,
-            ...(location.pathname === "/" ? styles.activeLink : {}),
-          }}
-        >
-          <span style={styles.icon}><BookIcon size={22} /></span>
-          {!collapsed && <span>Home</span>}
-        </Link>
+        <div className="tooltip-wrapper">
+          <Link
+            to="/"
+            style={{
+              ...styles.link,
+              ...(location.pathname === "/" ? styles.activeLink : {}),
+            }}
+          >
+            <span style={styles.icon}>
+              <BookIcon size={22} color={location.pathname === "/" ? activeColor : inactiveColor} />
+            </span>
+            {!collapsed && <span>Home</span>}
+          </Link>
+          <Tooltip label="Home" collapsed={collapsed} />
+        </div>
 
         {/* CULINARY */}
-        <Link
-          to="/culinary"
-          style={{
-            ...styles.link,
-            ...(location.pathname === "/culinary" ? styles.activeLink : {}),
-          }}
-        >
-          <span style={styles.icon}><ChefHatIcon size={22} /></span>
-          {!collapsed && <span>Culinary</span>}
-        </Link>
+        <div className="tooltip-wrapper">
+          <Link
+            to="/culinary"
+            style={{
+              ...styles.link,
+              ...(location.pathname === "/culinary" ? styles.activeLink : {}),
+            }}
+          >
+            <span style={styles.icon}>
+              <ChefHatIcon size={22} color={location.pathname === "/culinary" ? activeColor : inactiveColor} />
+            </span>
+            {!collapsed && <span>Culinary</span>}
+          </Link>
+          <Tooltip label="Culinary" collapsed={collapsed} />
+        </div>
 
         {/* SERVICE */}
-        <Link
-          to="/service"
-          style={{
-            ...styles.link,
-            ...(location.pathname === "/service" ? styles.activeLink : {}),
-          }}
-        >
-          <span style={styles.icon}><ServiceTrayIcon size={22} /></span>
-          {!collapsed && <span>Service</span>}
-        </Link>
+        <div className="tooltip-wrapper">
+          <Link
+            to="/service"
+            style={{
+              ...styles.link,
+              ...(location.pathname === "/service" ? styles.activeLink : {}),
+            }}
+          >
+            <span style={styles.icon}>
+              <ServiceTrayIcon size={22} color={location.pathname === "/service" ? activeColor : inactiveColor} />
+            </span>
+            {!collapsed && <span>Service</span>}
+          </Link>
+          <Tooltip label="Service" collapsed={collapsed} />
+        </div>
 
         {/* OPERATIONS */}
-        <Link
-          to="/operations"
-          style={{
-            ...styles.link,
-            ...(location.pathname === "/operations" ? styles.activeLink : {}),
-          }}
-        >
-          <span style={styles.icon}><GearIcon size={22} /></span>
-          {!collapsed && <span>Operations</span>}
-        </Link>
+        <div className="tooltip-wrapper">
+          <Link
+            to="/operations"
+            style={{
+              ...styles.link,
+              ...(location.pathname === "/operations" ? styles.activeLink : {}),
+            }}
+          >
+            <span style={styles.icon}>
+              <GearIcon size={22} color={location.pathname === "/operations" ? activeColor : inactiveColor} />
+            </span>
+            {!collapsed && <span>Operations</span>}
+          </Link>
+          <Tooltip label="Operations" collapsed={collapsed} />
+        </div>
 
         {/* BINDER */}
-        <Link
-          to="/binder"
-          style={{
-            ...styles.link,
-            ...(location.pathname === "/binder" ? styles.activeLink : {}),
-          }}
-        >
-          <span style={styles.icon}><BookIcon size={22} /></span>
-          {!collapsed && <span>Binder</span>}
-        </Link>
+        <div className="tooltip-wrapper">
+          <Link
+            to="/binder"
+            style={{
+              ...styles.link,
+              ...(location.pathname === "/binder" ? styles.activeLink : {}),
+            }}
+          >
+            <span style={styles.icon}>
+              <BookIcon size={22} color={location.pathname === "/binder" ? activeColor : inactiveColor} />
+            </span>
+            {!collapsed && <span>Binder</span>}
+          </Link>
+          <Tooltip label="Binder" collapsed={collapsed} />
+        </div>
 
         {/* BUNDLES */}
-        <Link
-          to="/bundle"
-          style={{
-            ...styles.link,
-            ...(location.pathname === "/bundle" ? styles.activeLink : {}),
-          }}
-        >
-          <span style={styles.icon}><LayersIcon size={22} /></span>
-          {!collapsed && <span>Bundles</span>}
-        </Link>
+        <div className="tooltip-wrapper">
+          <Link
+            to="/bundle"
+            style={{
+              ...styles.link,
+              ...(location.pathname === "/bundle" ? styles.activeLink : {}),
+            }}
+          >
+            <span style={styles.icon}>
+              <LayersIcon size={22} color={location.pathname === "/bundle" ? activeColor : inactiveColor} />
+            </span>
+            {!collapsed && <span>Bundles</span>}
+          </Link>
+          <Tooltip label="Bundles" collapsed={collapsed} />
+        </div>
 
       </div>
     </aside>
@@ -130,7 +178,6 @@ const styles = {
 
   collapsed: {
     width: "70px",
-    transition: "width 0.25s ease-out",
   },
 
   collapseButton: {
@@ -173,5 +220,6 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    transition: "color 0.2s ease",
   },
 };
