@@ -74,6 +74,11 @@ body {
   .nav-mobile-toggle {
     display: none !important;
   }
+
+  /* Hover-expand sidebar */
+  .sidebar:hover {
+    width: 230px !important;
+  }
 }
 
 
@@ -93,6 +98,15 @@ body {
   overflow-y: auto;
   transition: width 0.25s ease-out, transform 0.25s ease-out;
   z-index: 999;
+}
+
+/* Smooth label fade */
+.sidebar span {
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed span {
+  opacity: 0;
 }
 
 /* MOBILE SIDEBAR — slide-in */

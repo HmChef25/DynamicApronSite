@@ -8,6 +8,15 @@ import LayersIcon from "../icons/LayersIcon";
 export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
   const location = useLocation();
 
+  // Hover-expand logic
+  const handleMouseEnter = () => {
+    if (collapsed) onToggleCollapse();
+  };
+
+  const handleMouseLeave = () => {
+    if (!collapsed) onToggleCollapse();
+  };
+
   return (
     <aside
       className={`sidebar ${isOpen ? "open" : ""}`}
@@ -15,6 +24,8 @@ export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
         ...styles.sidebar,
         ...(collapsed ? styles.collapsed : {}),
       }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Collapse Toggle */}
       <button onClick={onToggleCollapse} style={styles.collapseButton}>
