@@ -4,18 +4,28 @@ import Sidebar from "./Sidebar";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);      // mobile slide-in
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // desktop collapse
 
   return (
     <div style={styles.container}>
       {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} />
+      <Sidebar
+        isOpen={sidebarOpen}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+      />
 
       {/* NavBar with sidebar toggle */}
       <NavBar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
       {/* Main Content */}
-      <main style={styles.main}>
+      <main
+        style={{
+          ...styles.main,
+          marginLeft: sidebarCollapsed ? "70px" : "230px", // responsive to collapse
+        }}
+      >
         <div style={styles.inner}>
           <Breadcrumbs />
           <div className="page-fade">{children}</div>
@@ -42,7 +52,6 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     padding: "2rem 1.5rem",
-    marginLeft: "230px", // shifts content right on desktop
   },
   inner: {
     width: "100%",
