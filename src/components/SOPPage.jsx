@@ -1,8 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import SOPStorage from "../intelligence/SOPStorage";
 
 export default function SOPPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const sop = SOPStorage.findById(id);
 
   if (!sop) {
@@ -18,17 +20,43 @@ export default function SOPPage() {
 
   return (
     <div>
+      {/* Title */}
       <h1 style={styles.title}>{sop.title}</h1>
+
+      {/* Edit Button */}
+      <button
+        style={styles.editButton}
+        onClick={() => navigate(`/sop/${id}/edit`)}
+      >
+        Edit SOP
+      </button>
+
+      {/* Metadata */}
       <p style={styles.subtitle}>
         Category: <strong>{capitalize(sop.category)}</strong> •{" "}
-        {sop.difficulty} • {sop.time}
+        {sop.difficulty || "Unspecified"} • {sop.time || "No time listed"}
       </p>
 
+      {/* Versioning Info */}
+      {(sop.createdAt || sop.updatedAt) && (
+        <p style={styles.meta}>
+          {sop.createdAt && (
+            <>Created: {new Date(sop.createdAt).toLocaleString()} • </>
+          )}
+          {sop.updatedAt && (
+            <>Updated: {new Date(sop.updatedAt).toLocaleString()} • </>
+          )}
+          Version: {sop.version || 1}
+        </p>
+      )}
+
+      {/* Summary */}
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Summary</h2>
-        <p style={styles.body}>{sop.summary}</p>
+        <p style={styles.body}>{sop.summary || "No summary provided."}</p>
       </section>
 
+      {/* Steps */}
       {sop.steps && sop.steps.length > 0 && (
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>Steps</h2>
@@ -42,17 +70,23 @@ export default function SOPPage() {
         </section>
       )}
 
+      {/* Tags */}
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Tags</h2>
         <div style={styles.tagRow}>
-          {(sop.tags || []).map((tag) => (
-            <span key={tag} style={styles.tag}>
-              {tag}
-            </span>
-          ))}
+          {(sop.tags || []).length > 0 ? (
+            sop.tags.map((tag) => (
+              <span key={tag} style={styles.tag}>
+                {tag}
+              </span>
+            ))
+          ) : (
+            <p style={styles.body}>No tags assigned.</p>
+          )}
         </div>
       </section>
 
+      {/* Prerequisites */}
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Prerequisites</h2>
         {sop.prerequisites && sop.prerequisites.length > 0 ? (
@@ -82,14 +116,30 @@ function capitalize(str) {
 const styles = {
   title: {
     fontSize: "2rem",
-    marginBottom: "0.5rem",
+    marginBottom: "0.25rem",
     color: "var(--text)",
   },
   subtitle: {
     fontSize: "1rem",
-    marginBottom: "1.5rem",
+    marginBottom: "0.5rem",
     color: "var(--text)",
     opacity: 0.8,
+  },
+  meta: {
+    fontSize: "0.85rem",
+    marginBottom: "1.5rem",
+    color: "var(--text)",
+    opacity: 0.6,
+  },
+  editButton: {
+    padding: "0.5rem 1rem",
+    background: "var(--accent)",
+    color: "var(--sidebar-bg)",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    marginBottom: "1rem",
+    fontWeight: "bold",
   },
   section: {
     marginBottom: "1.5rem",
@@ -97,10 +147,12 @@ const styles = {
   sectionTitle: {
     fontSize: "1.2rem",
     marginBottom: "0.5rem",
+    color: "var(--text)",
   },
   body: {
     fontSize: "0.98rem",
     lineHeight: 1.6,
+    color: "var(--text)",
   },
   tagRow: {
     display: "flex",

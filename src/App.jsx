@@ -13,6 +13,7 @@ import BundlesPage from "./pages/BundlesPage";
 import BinderIndex from "./components/BinderIndex";
 import SOPPage from "./components/SOPPage";
 import CreateSOPPage from "./components/CreateSOPPage";
+import EditSOPPage from "./components/EditSOPPage";
 
 export default function App() {
   return (
@@ -29,8 +30,9 @@ export default function App() {
 
           {/* Binder + SOP Intelligence */}
           <Route path="/binder" element={<BinderIndex />} />
-          <Route path="/sop/:id" element={<SOPPage />} />
           <Route path="/sop/create" element={<CreateSOPPage />} />
+          <Route path="/sop/:id" element={<SOPPage />} />
+          <Route path="/sop/:id/edit" element={<EditSOPPage />} />
 
         </Routes>
       </Layout>
