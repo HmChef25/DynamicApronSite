@@ -1,80 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import CulinaryPage from "./pages/CulinaryPage";
+import ServicePage from "./pages/ServicePage";
+import OperationsPage from "./pages/OperationsPage";
+import BundlesPage from "./pages/BundlesPage";
+import BinderIndex from "./components/BinderIndex";
+import SOPPage from "./components/SOPPage";
 
-// Home + Modules Overview
-import Home from "./pages/Home";
-import ModulesOverview from "./pages/ModulesOverview";
-
-// Culinary Module
-import Culinary from "./pages/Culinary";
-import BatchLogic from "./pages/Culinary/BatchLogic";
-import Pricing from "./pages/Culinary/Pricing";
-import Yields from "./pages/Culinary/Yields";
-import Ingredients from "./pages/Culinary/Ingredients";
-import RecipeFramework from "./pages/Culinary/RecipeFramework";
-
-// Service Module
-import Service from "./pages/Service";
-import GuiltyFork from "./pages/Service/GuiltyFork";
-
-// Operations Module
-import OperationsDashboard from "./pages/Operations/OperationsDashboard";
-import Checklists from "./pages/Operations/Checklists";
-import Admin from "./pages/Operations/Admin";
-import Systems from "./pages/Operations/Systems";
-
-// Binder System
-import BinderHome from "./pages/Binder/BinderHome";
-import CulinaryIndex from "./pages/Binder/CulinaryIndex";
-import ServiceIndex from "./pages/Binder/ServiceIndex";
-import OperationsIndex from "./pages/Binder/OperationsIndex";
-
-// Bundle Builder
-import Bundle from "./pages/Bundle";
-
-function App() {
+export default function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-
-          {/* Home */}
-          <Route path="/" element={<Home />} />
-
-          {/* Modules Overview */}
-          <Route path="/modules" element={<ModulesOverview />} />
-
-          {/* Culinary Module */}
-          <Route path="/culinary" element={<Culinary />} />
-          <Route path="/culinary/batch" element={<BatchLogic />} />
-          <Route path="/culinary/pricing" element={<Pricing />} />
-          <Route path="/culinary/yields" element={<Yields />} />
-          <Route path="/culinary/ingredients" element={<Ingredients />} />
-          <Route path="/culinary/framework" element={<RecipeFramework />} />
-
-          {/* Service Module */}
-          <Route path="/service" element={<Service />} />
-          <Route path="/service/guiltyfork" element={<GuiltyFork />} />
-
-          {/* Operations Module */}
-          <Route path="/operations" element={<OperationsDashboard />} />
-          <Route path="/operations/checklists" element={<Checklists />} />
-          <Route path="/operations/admin" element={<Admin />} />
-          <Route path="/operations/systems" element={<Systems />} />
-
-          {/* Binder System */}
-          <Route path="/binder" element={<BinderHome />} />
-          <Route path="/binder/culinary" element={<CulinaryIndex />} />
-          <Route path="/binder/service" element={<ServiceIndex />} />
-          <Route path="/binder/operations" element={<OperationsIndex />} />
-
-          {/* Bundle Builder */}
-          <Route path="/bundle" element={<Bundle />} />
-
+          <Route path="/" element={<HomePage />} />
+          <Route path="/culinary" element={<CulinaryPage />} />
+          <Route path="/service" element={<ServicePage />} />
+          <Route path="/operations" element={<OperationsPage />} />
+          <Route path="/binder" element={<BinderIndex />} />
+          <Route path="/bundle" element={<BundlesPage />} />
+          <Route path="/sop/:id" element={<SOPPage />} />
         </Routes>
       </Layout>
     </Router>
   );
 }
-
-export default App;
