@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import SOPRegistry from "../intelligence/SOPRegistry";
+import SOPStorage from "../intelligence/SOPStorage";
 
 export default function SOPPage() {
   const { id } = useParams();
-  const sop = SOPRegistry.find((item) => item.id === id);
+  const sop = SOPStorage.findById(id);
 
   if (!sop) {
     return (
@@ -29,10 +29,23 @@ export default function SOPPage() {
         <p style={styles.body}>{sop.summary}</p>
       </section>
 
+      {sop.steps && sop.steps.length > 0 && (
+        <section style={styles.section}>
+          <h2 style={styles.sectionTitle}>Steps</h2>
+          <ol style={styles.list}>
+            {sop.steps.map((step, idx) => (
+              <li key={idx} style={styles.listItem}>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Tags</h2>
         <div style={styles.tagRow}>
-          {sop.tags.map((tag) => (
+          {(sop.tags || []).map((tag) => (
             <span key={tag} style={styles.tag}>
               {tag}
             </span>
@@ -42,12 +55,10 @@ export default function SOPPage() {
 
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Prerequisites</h2>
-        {sop.prerequisites.length === 0 ? (
-          <p style={styles.body}>None. This SOP can be used standalone.</p>
-        ) : (
+        {sop.prerequisites && sop.prerequisites.length > 0 ? (
           <ul style={styles.list}>
             {sop.prerequisites.map((pid) => {
-              const pre = SOPRegistry.find((item) => item.id === pid);
+              const pre = SOPStorage.findById(pid);
               return (
                 <li key={pid} style={styles.listItem}>
                   {pre ? pre.title : pid}
@@ -55,6 +66,8 @@ export default function SOPPage() {
               );
             })}
           </ul>
+        ) : (
+          <p style={styles.body}>None. This SOP can be used standalone.</p>
         )}
       </section>
     </div>

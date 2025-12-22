@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SOPTemplateRegistry from "../intelligence/SOPTemplateRegistry";
 import SOPTemplateEngine from "../intelligence/SOPTemplateEngine";
+import SOPStorage from "../intelligence/SOPStorage";
 
 export default function CreateSOPPage() {
   const [templateId, setTemplateId] = useState("template-basic");
@@ -8,17 +10,23 @@ export default function CreateSOPPage() {
   const [category, setCategory] = useState("culinary");
   const [summary, setSummary] = useState("");
 
+  const navigate = useNavigate();
   const template = SOPTemplateRegistry.find((t) => t.id === templateId);
 
   const handleGenerate = () => {
-    const sop = SOPTemplateEngine.generateFromTemplate(templateId, {
+    const generated = SOPTemplateEngine.generateFromTemplate(templateId, {
       title,
       category,
       summary,
     });
 
-    console.log("Generated SOP:", sop);
-    alert("SOP generated! Check console for output.");
+    if (!generated) {
+      alert("Failed to generate SOP from template.");
+      return;
+    }
+
+    const saved = SOPStorage.saveNewSOP(generated);
+    navigate(`/sop/${saved.id}`);
   };
 
   return (
@@ -63,8 +71,21 @@ export default function CreateSOPPage() {
         onChange={(e) => setSummary(e.target.value)}
       />
 
+      {template && template.fields.steps && template.fields.steps.length > 0 && (
+        <div style={styles.templateBox}>
+          <h2 style={styles.sectionTitle}>Template Preview (Steps)</h2>
+          <ol style={styles.list}>
+            {template.fields.steps.map((step, idx) => (
+              <li key={idx} style={styles.listItem}>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
       <button style={styles.button} onClick={handleGenerate}>
-        Generate SOP
+        Generate & Save SOP
       </button>
     </div>
   );
@@ -98,6 +119,22 @@ const styles = {
     border: "1px solid var(--accent)",
     background: "var(--bg)",
     color: "var(--text)",
+  },
+  templateBox: {
+    marginTop: "1.5rem",
+    padding: "0.75rem",
+    borderRadius: "8px",
+    background: "rgba(0,0,0,0.03)",
+  },
+  sectionTitle: {
+    fontSize: "1.1rem",
+    marginBottom: "0.5rem",
+  },
+  list: {
+    paddingLeft: "1.2rem",
+  },
+  listItem: {
+    marginBottom: "0.25rem",
   },
   button: {
     marginTop: "1.5rem",
