@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SOPStorage from "../intelligence/SOPStorage";
+import AIHooks from "../intelligence/AIHooks";
 
 export default function EditSOPPage() {
   const { id } = useParams();
@@ -16,6 +17,18 @@ export default function EditSOPPage() {
   const [tags, setTags] = useState(original?.tags || []);
   const [steps, setSteps] = useState(original?.steps || []);
   const [prerequisites, setPrerequisites] = useState(original?.prerequisites || []);
+  const [related, setRelated] = useState([]);
+
+  const [isSuggestingTags, setIsSuggestingTags] = useState(false);
+  const [isSummarizing, setIsSummarizing] = useState(false);
+
+  useEffect(() => {
+    if (!original) return;
+    (async () => {
+      const relatedIds = await AIHooks.suggestRelatedSOPs(original);
+      setRelated(relatedIds);
+    })();
+  }, [id]);
 
   if (!original) {
     return (
@@ -66,6 +79,29 @@ export default function EditSOPPage() {
     navigate(`/sop/${id}`);
   };
 
+  const handleSuggestTags = async () => {
+    setIsSuggestingTags(true);
+    try {
+      const sopLike = { title, summary, steps, category, tags };
+      const suggested = await AIHooks.suggestTagsFromSOP(sopLike);
+      const merged = Array.from(new Set([...(tags || []), ...suggested]));
+      setTags(merged);
+    } finally {
+      setIsSuggestingTags(false);
+    }
+  };
+
+  const handleSummarize = async () => {
+    setIsSummarizing(true);
+    try {
+      const sopLike = { title, summary, steps, category };
+      const newSummary = await AIHooks.summarizeSOP(sopLike);
+      setSummary(newSummary);
+    } finally {
+      setIsSummarizing(false);
+    }
+  };
+
   const allSOPs = SOPStorage.getAllSOPs().filter((s) => s.id !== id);
 
   return (
@@ -83,7 +119,14 @@ export default function EditSOPPage() {
       </select>
 
       <label style={styles.label}>Summary</label>
-      <textarea style={styles.textarea} value={summary} onChange={(e) => setSummary(e.target.value)} />
+      <textarea
+        style={styles.textarea}
+        value={summary}
+        onChange={(e) => setSummary(e.target.value)}
+      />
+      <button style={styles.smallButton} onClick={handleSummarize} disabled={isSummarizing}>
+        {isSummarizing ? "Summarizing..." : "Suggest Summary"}
+      </button>
 
       <label style={styles.label}>Difficulty</label>
       <select style={styles.input} value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
@@ -113,6 +156,13 @@ export default function EditSOPPage() {
           }
         }}
       />
+      <button
+        style={styles.smallButton}
+        onClick={handleSuggestTags}
+        disabled={isSuggestingTags}
+      >
+        {isSuggestingTags ? "Suggesting..." : "Suggest Tags"}
+      </button>
 
       <label style={styles.label}>Steps</label>
       {steps.map((step, index) => (
@@ -145,6 +195,24 @@ export default function EditSOPPage() {
         ))}
       </div>
 
+      {/* Related SOPs (AI-suggested) */}
+      {related.length > 0 && (
+        <div style={styles.relatedBox}>
+          <h3 style={styles.sectionTitle}>Suggested Related SOPs</h3>
+          <ul style={styles.list}>
+            {related.map((rid) => {
+              const rs = SOPStorage.findById(rid);
+              if (!rs) return null;
+              return (
+                <li key={rid} style={styles.listItem}>
+                  {rs.title}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
       <button style={styles.saveButton} onClick={handleSave}>
         Save Changes
       </button>
@@ -165,7 +233,7 @@ const styles = {
   },
   textarea: {
     width: "100%",
-    height: "100px",
+    minHeight: "100px",
     padding: "0.5rem",
     borderRadius: "6px",
     border: "1px solid var(--accent)",
@@ -207,6 +275,32 @@ const styles = {
   },
   prereqList: { display: "flex", flexDirection: "column", gap: "0.25rem" },
   prereqItem: { display: "flex", alignItems: "center", gap: "0.5rem" },
+  smallButton: {
+    marginTop: "0.5rem",
+    padding: "0.35rem 0.75rem",
+    background: "var(--accent)",
+    color: "var(--sidebar-bg)",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "0.85rem",
+  },
+  relatedBox: {
+    marginTop: "1.5rem",
+    padding: "0.75rem",
+    borderRadius: "8px",
+    background: "rgba(0,0,0,0.03)",
+  },
+  sectionTitle: {
+    fontSize: "1.1rem",
+    marginBottom: "0.5rem",
+  },
+  list: {
+    paddingLeft: "1.2rem",
+  },
+  listItem: {
+    marginBottom: "0.25rem",
+  },
   saveButton: {
     marginTop: "2rem",
     padding: "0.75rem 1.25rem",
