@@ -15,6 +15,9 @@ import SOPPage from "./components/SOPPage";
 import CreateSOPPage from "./components/CreateSOPPage";
 import EditSOPPage from "./components/EditSOPPage";
 
+// Module Detail Page
+import ModulePage from "./pages/ModulePage";
+
 export default function App() {
   return (
     <Router>
@@ -27,6 +30,9 @@ export default function App() {
           <Route path="/service" element={<ServicePage />} />
           <Route path="/operations" element={<OperationsPage />} />
           <Route path="/bundle" element={<BundlesPage />} />
+
+          {/* Module Detail Pages */}
+          <Route path="/module/:id" element={<ModulePage />} />
 
           {/* Binder + SOP Intelligence */}
           <Route path="/binder" element={<BinderIndex />} />
