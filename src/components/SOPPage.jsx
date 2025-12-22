@@ -9,7 +9,7 @@ export default function SOPPage() {
 
   if (!sop) {
     return (
-      <div>
+      <div style={styles.container}>
         <h1 style={styles.title}>SOP Not Found</h1>
         <p style={styles.subtitle}>
           We couldn’t find an SOP with ID: <code>{id}</code>
@@ -19,34 +19,44 @@ export default function SOPPage() {
   }
 
   return (
-    <div>
-      {/* Title */}
-      <h1 style={styles.title}>{sop.title}</h1>
+    <div style={styles.container}>
+      {/* Header */}
+      <div style={styles.headerRow}>
+        <h1 style={styles.title}>{sop.title}</h1>
 
-      {/* Edit Button */}
-      <button
-        style={styles.editButton}
-        onClick={() => navigate(`/sop/${id}/edit`)}
-      >
-        Edit SOP
-      </button>
+        <button
+          style={styles.editButton}
+          onClick={() => navigate(`/sop/${id}/edit`)}
+        >
+          Edit SOP
+        </button>
+      </div>
 
       {/* Metadata */}
-      <p style={styles.subtitle}>
-        Category: <strong>{capitalize(sop.category)}</strong> •{" "}
-        {sop.difficulty || "Unspecified"} • {sop.time || "No time listed"}
-      </p>
+      <div style={styles.metaBox}>
+        <span style={styles.metaItem}>
+          <strong>Category:</strong> {capitalize(sop.category)}
+        </span>
+        <span style={styles.metaDivider}>•</span>
+        <span style={styles.metaItem}>
+          <strong>Difficulty:</strong> {sop.difficulty || "Unspecified"}
+        </span>
+        <span style={styles.metaDivider}>•</span>
+        <span style={styles.metaItem}>
+          <strong>Time:</strong> {sop.time || "No time listed"}
+        </span>
+      </div>
 
-      {/* Versioning Info */}
+      {/* Versioning */}
       {(sop.createdAt || sop.updatedAt) && (
-        <p style={styles.meta}>
+        <p style={styles.versionInfo}>
           {sop.createdAt && (
             <>Created: {new Date(sop.createdAt).toLocaleString()} • </>
           )}
           {sop.updatedAt && (
             <>Updated: {new Date(sop.updatedAt).toLocaleString()} • </>
           )}
-          Version: {sop.version || 1}
+          Version {sop.version || 1}
         </p>
       )}
 
@@ -60,10 +70,11 @@ export default function SOPPage() {
       {sop.steps && sop.steps.length > 0 && (
         <section style={styles.section}>
           <h2 style={styles.sectionTitle}>Steps</h2>
-          <ol style={styles.list}>
+          <ol style={styles.stepList}>
             {sop.steps.map((step, idx) => (
-              <li key={idx} style={styles.listItem}>
-                {step}
+              <li key={idx} style={styles.stepItem}>
+                <div style={styles.stepNumber}>{idx + 1}</div>
+                <div style={styles.stepText}>{step}</div>
               </li>
             ))}
           </ol>
@@ -114,22 +125,21 @@ function capitalize(str) {
 }
 
 const styles = {
+  container: {
+    maxWidth: "800px",
+    margin: "0 auto",
+    padding: "1rem",
+  },
+  headerRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "0.5rem",
+  },
   title: {
     fontSize: "2rem",
-    marginBottom: "0.25rem",
     color: "var(--text)",
-  },
-  subtitle: {
-    fontSize: "1rem",
-    marginBottom: "0.5rem",
-    color: "var(--text)",
-    opacity: 0.8,
-  },
-  meta: {
-    fontSize: "0.85rem",
-    marginBottom: "1.5rem",
-    color: "var(--text)",
-    opacity: 0.6,
+    margin: 0,
   },
   editButton: {
     padding: "0.5rem 1rem",
@@ -138,32 +148,78 @@ const styles = {
     border: "none",
     borderRadius: "6px",
     cursor: "pointer",
-    marginBottom: "1rem",
     fontWeight: "bold",
   },
-  section: {
+  metaBox: {
+    display: "flex",
+    gap: "0.5rem",
+    alignItems: "center",
+    marginBottom: "0.5rem",
+    flexWrap: "wrap",
+  },
+  metaItem: {
+    fontSize: "0.95rem",
+    color: "var(--text)",
+  },
+  metaDivider: {
+    opacity: 0.5,
+  },
+  versionInfo: {
+    fontSize: "0.85rem",
+    color: "var(--text)",
+    opacity: 0.6,
     marginBottom: "1.5rem",
   },
+  section: {
+    marginBottom: "1.75rem",
+  },
   sectionTitle: {
-    fontSize: "1.2rem",
+    fontSize: "1.25rem",
     marginBottom: "0.5rem",
     color: "var(--text)",
   },
   body: {
-    fontSize: "0.98rem",
+    fontSize: "1rem",
     lineHeight: 1.6,
     color: "var(--text)",
+  },
+  stepList: {
+    listStyle: "none",
+    padding: 0,
+    margin: 0,
+  },
+  stepItem: {
+    display: "flex",
+    gap: "0.75rem",
+    marginBottom: "0.75rem",
+    alignItems: "flex-start",
+  },
+  stepNumber: {
+    width: "28px",
+    height: "28px",
+    borderRadius: "50%",
+    background: "var(--accent)",
+    color: "var(--sidebar-bg)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: "bold",
+  },
+  stepText: {
+    flex: 1,
+    fontSize: "1rem",
+    lineHeight: 1.5,
   },
   tagRow: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "0.4rem",
+    gap: "0.5rem",
   },
   tag: {
-    fontSize: "0.85rem",
-    padding: "0.2rem 0.5rem",
-    borderRadius: "999px",
+    padding: "0.25rem 0.75rem",
     background: "rgba(0,0,0,0.06)",
+    borderRadius: "999px",
+    fontSize: "0.85rem",
   },
   list: {
     paddingLeft: "1.2rem",
