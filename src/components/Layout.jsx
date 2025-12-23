@@ -26,7 +26,7 @@ export default function Layout({ children }) {
       <main
         style={{
           ...styles.main,
-          marginLeft: isMobile ? "0px" : "240px", // matches polished sidebar width
+          marginLeft: isMobile ? "0px" : "240px",
         }}
       >
         <div style={styles.inner}>
