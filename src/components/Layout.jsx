@@ -1,32 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Sidebar from "./Sidebar";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  const isMobile = window.innerWidth <= 768;
+  // Handle window resize for responsive layout
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div style={styles.container}>
-      <Sidebar
-        isOpen={sidebarOpen}
-        collapsed={sidebarCollapsed}
-        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
-      />
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} />
 
+      {/* Top Nav */}
       <NavBar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
+      {/* Main Content */}
       <main
         style={{
           ...styles.main,
-          marginLeft: isMobile
-            ? "0px"
-            : sidebarCollapsed
-            ? "70px"
-            : "230px",
+          marginLeft: isMobile ? "0px" : "240px", // matches polished sidebar width
         }}
       >
         <div style={styles.inner}>
@@ -35,6 +35,7 @@ export default function Layout({ children }) {
         </div>
       </main>
 
+      {/* Footer */}
       <footer style={styles.footer}>
         Dynamic Apron OS © {new Date().getFullYear()}
       </footer>

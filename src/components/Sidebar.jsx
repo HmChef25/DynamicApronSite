@@ -1,223 +1,91 @@
-import { Link, useLocation } from "react-router-dom";
-import ChefHatIcon from "../icons/ChefHatIcon";
-import ServiceTrayIcon from "../icons/ServiceTrayIcon";
-import GearIcon from "../icons/GearIcon";
-import BookIcon from "../icons/BookIcon";
-import LayersIcon from "../icons/LayersIcon";
+import { NavLink } from "react-router-dom";
 
-/* Tooltip Component */
-function Tooltip({ label, collapsed }) {
-  return (
-    <div
-      className="sidebar-tooltip"
-      style={{
-        opacity: collapsed ? 1 : 0,
-        pointerEvents: "none",
-      }}
-    >
-      {label}
-    </div>
-  );
-}
+export default function Sidebar() {
+  const links = [
+    { to: "/", label: "Home", icon: "🏠" },
+    { to: "/binder", label: "Binder", icon: "📚" },
 
-export default function Sidebar({ isOpen, collapsed, onToggleCollapse }) {
-  const location = useLocation();
+    // Modules
+    { to: "/module/culinary", label: "Culinary", icon: "🍳" },
+    { to: "/module/service", label: "Service", icon: "🧾" },
+    { to: "/module/operations", label: "Operations", icon: "⚙️" },
 
-  const activeColor = "var(--accent)";
-  const inactiveColor = "var(--sidebar-text)";
-
-  const handleMouseEnter = () => {
-    if (collapsed) onToggleCollapse();
-  };
-
-  const handleMouseLeave = () => {
-    if (!collapsed) onToggleCollapse();
-  };
+    // Bundles
+    { to: "/bundle", label: "Bundles", icon: "🗂️" },
+  ];
 
   return (
-    <aside
-      className={`sidebar ${isOpen ? "open" : ""} ${collapsed ? "collapsed" : ""}`}
-      style={{
-        ...styles.sidebar,
-        ...(collapsed ? styles.collapsed : {}),
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <button onClick={onToggleCollapse} style={styles.collapseButton}>
-        {collapsed ? "›" : "‹"}
-      </button>
-
-      <div style={styles.section}>
-
-        {/* HOME */}
-        <div className="tooltip-wrapper">
-          <Link
-            to="/"
-            style={{
-              ...styles.link,
-              ...(location.pathname === "/" ? styles.activeLink : {}),
-            }}
-          >
-            <span style={styles.icon}>
-              <BookIcon size={22} color={location.pathname === "/" ? activeColor : inactiveColor} />
-            </span>
-            {!collapsed && <span>Home</span>}
-          </Link>
-          <Tooltip label="Home" collapsed={collapsed} />
-        </div>
-
-        {/* CULINARY */}
-        <div className="tooltip-wrapper">
-          <Link
-            to="/culinary"
-            style={{
-              ...styles.link,
-              ...(location.pathname === "/culinary" ? styles.activeLink : {}),
-            }}
-          >
-            <span style={styles.icon}>
-              <ChefHatIcon size={22} color={location.pathname === "/culinary" ? activeColor : inactiveColor} />
-            </span>
-            {!collapsed && <span>Culinary</span>}
-          </Link>
-          <Tooltip label="Culinary" collapsed={collapsed} />
-        </div>
-
-        {/* SERVICE */}
-        <div className="tooltip-wrapper">
-          <Link
-            to="/service"
-            style={{
-              ...styles.link,
-              ...(location.pathname === "/service" ? styles.activeLink : {}),
-            }}
-          >
-            <span style={styles.icon}>
-              <ServiceTrayIcon size={22} color={location.pathname === "/service" ? activeColor : inactiveColor} />
-            </span>
-            {!collapsed && <span>Service</span>}
-          </Link>
-          <Tooltip label="Service" collapsed={collapsed} />
-        </div>
-
-        {/* OPERATIONS */}
-        <div className="tooltip-wrapper">
-          <Link
-            to="/operations"
-            style={{
-              ...styles.link,
-              ...(location.pathname === "/operations" ? styles.activeLink : {}),
-            }}
-          >
-            <span style={styles.icon}>
-              <GearIcon size={22} color={location.pathname === "/operations" ? activeColor : inactiveColor} />
-            </span>
-            {!collapsed && <span>Operations</span>}
-          </Link>
-          <Tooltip label="Operations" collapsed={collapsed} />
-        </div>
-
-        {/* BINDER */}
-        <div className="tooltip-wrapper">
-          <Link
-            to="/binder"
-            style={{
-              ...styles.link,
-              ...(location.pathname === "/binder" ? styles.activeLink : {}),
-            }}
-          >
-            <span style={styles.icon}>
-              <BookIcon size={22} color={location.pathname === "/binder" ? activeColor : inactiveColor} />
-            </span>
-            {!collapsed && <span>Binder</span>}
-          </Link>
-          <Tooltip label="Binder" collapsed={collapsed} />
-        </div>
-
-        {/* BUNDLES */}
-        <div className="tooltip-wrapper">
-          <Link
-            to="/bundle"
-            style={{
-              ...styles.link,
-              ...(location.pathname === "/bundle" ? styles.activeLink : {}),
-            }}
-          >
-            <span style={styles.icon}>
-              <LayersIcon size={22} color={location.pathname === "/bundle" ? activeColor : inactiveColor} />
-            </span>
-            {!collapsed && <span>Bundles</span>}
-          </Link>
-          <Tooltip label="Bundles" collapsed={collapsed} />
-        </div>
-
+    <aside style={styles.sidebar}>
+      <div style={styles.logoBox}>
+        <span style={styles.logoIcon}>🧠</span>
+        <span style={styles.logoText}>Dynamic Apron OS</span>
       </div>
+
+      <nav style={styles.nav}>
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            style={({ isActive }) =>
+              isActive
+                ? { ...styles.link, ...styles.activeLink }
+                : styles.link
+            }
+          >
+            <span style={styles.icon}>{link.icon}</span>
+            <span>{link.label}</span>
+          </NavLink>
+        ))}
+      </nav>
     </aside>
   );
 }
 
 const styles = {
   sidebar: {
-    width: "230px",
+    width: "240px",
     background: "var(--sidebar-bg)",
-    color: "var(--sidebar-text)",
-    padding: "1.5rem 1rem",
-    height: "100vh",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    overflowY: "auto",
-    transition: "width 0.25s ease-out, transform 0.25s ease-out",
-    zIndex: 999,
-    display: "flex",
-    flexDirection: "column",
-  },
-
-  collapsed: {
-    width: "70px",
-  },
-
-  collapseButton: {
-    background: "transparent",
-    border: "none",
-    color: "var(--sidebar-text)",
-    cursor: "pointer",
-    fontSize: "1.2rem",
-    marginBottom: "1.5rem",
-    alignSelf: "flex-end",
-  },
-
-  section: {
+    color: "var(--text)",
+    padding: "1rem",
     display: "flex",
     flexDirection: "column",
     gap: "1rem",
+    borderRight: "1px solid rgba(0,0,0,0.1)",
   },
-
+  logoBox: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    marginBottom: "1rem",
+  },
+  logoIcon: {
+    fontSize: "1.6rem",
+  },
+  logoText: {
+    fontSize: "1.1rem",
+    fontWeight: "bold",
+  },
+  nav: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.25rem",
+  },
   link: {
     display: "flex",
     alignItems: "center",
     gap: "0.75rem",
-    color: "var(--sidebar-text)",
+    padding: "0.6rem 0.75rem",
+    borderRadius: "8px",
     textDecoration: "none",
-    fontSize: "1.05rem",
-    padding: "0.5rem 0.25rem",
-    borderRadius: "6px",
-    transition: "background 0.2s ease",
+    color: "var(--text)",
+    transition: "background 0.15s ease, transform 0.15s ease",
   },
-
   activeLink: {
-    background: "rgba(255, 255, 255, 0.15)",
-    borderRadius: "6px",
-    padding: "0.5rem 0.5rem",
-    fontWeight: "600",
+    background: "var(--accent)",
+    color: "var(--sidebar-bg)",
+    fontWeight: "bold",
   },
-
   icon: {
-    width: "28px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    transition: "color 0.2s ease",
+    fontSize: "1.2rem",
   },
 };
