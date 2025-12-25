@@ -1,47 +1,49 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import Layout from "./components/Layout";
-
-// Core Pages
-import HomePage from "./pages/HomePage";
-import CulinaryPage from "./pages/CulinaryPage";
-import ServicePage from "./pages/ServicePage";
-import OperationsPage from "./pages/OperationsPage";
-import BundlesPage from "./pages/BundlesPage";
-
-// Intelligence Layer Pages
-import BinderIndex from "./components/BinderIndex";
-import SOPPage from "./components/SOPPage";
-import CreateSOPPage from "./components/CreateSOPPage";
-import EditSOPPage from "./components/EditSOPPage";
-
-// Module Detail Page
-import ModulePage from "./pages/ModulePage";
+import Sidebar from "./components/Sidebar";
+import NavBar from "./components/NavBar";
+import Dashboard from "./pages/Dashboard";
+import Culinary from "./pages/Culinary";
+import Service from "./pages/Service";
+import Operations from "./pages/Operations";
+import BinderHome from "./pages/Binder/BinderHome";
 
 export default function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
+      <div style={styles.appContainer}>
+        <Sidebar />
 
-          {/* Main Pages */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/culinary" element={<CulinaryPage />} />
-          <Route path="/service" element={<ServicePage />} />
-          <Route path="/operations" element={<OperationsPage />} />
-          <Route path="/bundle" element={<BundlesPage />} />
+        <div style={styles.mainContent}>
+          <NavBar />
 
-          {/* Module Detail Pages */}
-          <Route path="/module/:id" element={<ModulePage />} />
-
-          {/* Binder + SOP Intelligence */}
-          <Route path="/binder" element={<BinderIndex />} />
-          <Route path="/sop/create" element={<CreateSOPPage />} />
-          <Route path="/sop/:id" element={<SOPPage />} />
-          <Route path="/sop/:id/edit" element={<EditSOPPage />} />
-
-        </Routes>
-      </Layout>
+          <div style={styles.pageWrapper}>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/culinary" element={<Culinary />} />
+              <Route path="/service" element={<Service />} />
+              <Route path="/operations" element={<Operations />} />
+              <Route path="/binder" element={<BinderHome />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
     </Router>
   );
 }
+
+const styles = {
+  appContainer: {
+    display: "flex",
+    height: "100vh",
+    width: "100%",
+  },
+  mainContent: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: "240px", // matches your sidebar width
+  },
+  pageWrapper: {
+    padding: "2rem",
+  },
+};

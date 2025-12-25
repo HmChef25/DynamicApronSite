@@ -3,28 +3,59 @@
 ========================================= */
 
 :root {
-  --bg: #F1FAEE;
+  --bg: #F7FBFC;
   --text: #1D3557;
+
   --sidebar-bg: #1D3557;
   --sidebar-text: #F1FAEE;
-  --accent: #A8DADC;
+
+  --accent: #7CC9C4;
+  --accent-hover: #6AB7B2;
+
   --tooltip-bg: #1D3557;
   --tooltip-text: #F1FAEE;
+
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0,0,0,0.08);
+  --shadow: rgba(0,0,0,0.08);
+
+  /* Design tokens */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+
+  --space: 1rem;
+  --space-sm: 0.5rem;
+  --space-lg: 2rem;
+
+  /* Motion */
+  --motion-duration: 0.25s;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hover-lift: translateY(-3px);
 }
 
 [data-theme="dark"] {
   --bg: #0B132B;
   --text: #E0E6F0;
+
   --sidebar-bg: #1C2541;
   --sidebar-text: #E0E6F0;
+
   --accent: #5BC0BE;
+  --accent-hover: #4AAEAC;
+
   --tooltip-bg: #1C2541;
   --tooltip-text: #E0E6F0;
+
+  --card-bg: #1C2541;
+  --card-border: rgba(255,255,255,0.08);
+  --shadow: rgba(0,0,0,0.4);
 }
 
 /* Smooth theme transitions */
 * {
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color var(--motion-duration) var(--motion-ease),
+              color var(--motion-duration) var(--motion-ease);
 }
 
 /* =========================================
@@ -44,14 +75,79 @@ body {
   line-height: 1.5;
 }
 
-/* Smooth fade for page transitions */
+/* =========================================
+   PAGE TRANSITIONS
+========================================= */
+
 .page-fade {
-  animation: pageFade 0.25s ease-out;
+  opacity: 0;
+  animation: pageFade var(--motion-duration) var(--motion-ease) forwards;
 }
 
 @keyframes pageFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   ACCENT BUTTONS + LINKS
+========================================= */
+
+button,
+.accent-btn {
+  background: var(--accent);
+  color: var(--sidebar-bg);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--motion-duration) var(--motion-ease),
+              transform var(--motion-duration) var(--motion-ease);
+}
+
+button:hover,
+.accent-btn:hover {
+  background: var(--accent-hover);
+  transform: var(--hover-lift);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--motion-duration) var(--motion-ease);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* =========================================
+   CARD POLISH
+========================================= */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: 0 4px 10px var(--shadow);
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease);
+}
+
+.card:hover {
+  transform: var(--hover-lift);
+  box-shadow: 0 8px 18px var(--shadow);
+}
+
+[data-theme="dark"] .card {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
 /* =========================================
@@ -75,10 +171,7 @@ body {
 ========================================= */
 
 @media (max-width: 768px) {
-  .nav-desktop {
-    display: none !important;
-  }
-
+  .nav-desktop,
   .nav-search {
     display: none !important;
   }
@@ -92,10 +185,6 @@ body {
   .nav-mobile-toggle {
     display: none !important;
   }
-
-  .sidebar:hover {
-    width: 230px !important;
-  }
 }
 
 /* =========================================
@@ -103,7 +192,7 @@ body {
 ========================================= */
 
 .sidebar {
-  width: 230px;
+  width: 240px;
   background: var(--sidebar-bg);
   color: var(--sidebar-text);
   padding: 1.5rem 1rem;
@@ -112,22 +201,14 @@ body {
   top: 0;
   left: 0;
   overflow-y: auto;
-  transition: width 0.25s ease-out, transform 0.25s ease-out;
+  transition: transform var(--motion-duration) var(--motion-ease);
   z-index: 999;
-}
-
-.sidebar span {
-  transition: opacity 0.2s ease;
-}
-
-.sidebar.collapsed span {
-  opacity: 0;
 }
 
 /* MOBILE SIDEBAR */
 @media (max-width: 768px) {
   .sidebar {
-    transform: translateX(-100%);
+    transform: translateX(-240px);
   }
   .sidebar.open {
     transform: translateX(0);
@@ -138,7 +219,6 @@ body {
 @media (min-width: 769px) {
   .sidebar {
     transform: none;
-    position: fixed;
   }
 }
 
@@ -158,24 +238,18 @@ body {
   background: var(--tooltip-bg);
   color: var(--tooltip-text);
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   white-space: nowrap;
   font-size: 0.85rem;
   opacity: 0;
-  transition: opacity 0.15s ease-out;
+  transition: opacity var(--motion-duration) var(--motion-ease);
   pointer-events: none;
   z-index: 2000;
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-.sidebar.collapsed .sidebar-tooltip {
+.sidebar:hover .sidebar-tooltip {
   opacity: 1;
-}
-
-@media (min-width: 769px) {
-  .sidebar:hover .sidebar-tooltip {
-    opacity: 0;
-  }
 }
 
 /* =========================================
