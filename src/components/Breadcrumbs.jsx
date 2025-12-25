@@ -1,53 +1,45 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Breadcrumbs() {
   const location = useLocation();
-  const pathParts = location.pathname.split("/").filter(Boolean);
+  const parts = location.pathname.split("/").filter(Boolean);
 
-  const crumbs = pathParts.map((part, index) => {
-    const to = "/" + pathParts.slice(0, index + 1).join("/");
+  const crumbs = parts.map((part, index) => {
+    const path = "/" + parts.slice(0, index + 1).join("/");
     const label = part.charAt(0).toUpperCase() + part.slice(1);
 
-    return { label, to };
+    return (
+      <span key={path} style={styles.crumb}>
+        <Link to={path} style={styles.link}>{label}</Link>
+        {index < parts.length - 1 && <span style={styles.separator}>/</span>}
+      </span>
+    );
   });
 
   return (
     <div style={styles.container}>
-      <Link to="/" style={styles.home}>Home</Link>
-      {crumbs.map((crumb, i) => (
-        <span key={crumb.to} style={styles.segment}>
-          <span style={styles.separator}>/</span>
-          <Link to={crumb.to} style={styles.link}>{crumb.label}</Link>
-        </span>
-      ))}
+      <Link to="/" style={styles.link}>Home</Link>
+      {parts.length > 0 && <span style={styles.separator}>/</span>}
+      {crumbs}
     </div>
   );
 }
 
 const styles = {
   container: {
-    marginBottom: "1rem",
+    opacity: 0.8,
     fontSize: "0.9rem",
-    color: "#555",
-    display: "flex",
+    marginBottom: "0.5rem",
+  },
+  crumb: {
+    display: "inline-flex",
     alignItems: "center",
-    flexWrap: "wrap"
-  },
-  home: {
-    color: "#1D3557",
-    textDecoration: "none",
-    fontWeight: 600
-  },
-  segment: {
-    display: "flex",
-    alignItems: "center"
-  },
-  separator: {
-    margin: "0 0.5rem",
-    color: "#999"
   },
   link: {
-    color: "#1D3557",
-    textDecoration: "none"
-  }
+    color: "var(--accent)",
+    textDecoration: "none",
+  },
+  separator: {
+    margin: "0 0.35rem",
+  },
 };
