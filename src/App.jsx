@@ -18,6 +18,16 @@ import BatchLogic from "./pages/Culinary/BatchLogic";
 import Pricing from "./pages/Culinary/Pricing";
 import RecipeFramework from "./pages/Culinary/RecipeFramework";
 
+// Service Subpages
+import PricingPlans from "./pages/Service/PricingPlans";
+import AddOns from "./pages/Service/AddOns";
+import ServiceSOPs from "./pages/Service/ServiceSOPs";
+import ClientIntake from "./pages/Service/ClientIntake";
+import WeeklyServiceFlow from "./pages/Service/WeeklyServiceFlow";
+import HouseholdProfiles from "./pages/Service/HouseholdProfiles";
+import HouseholdNotes from "./pages/Service/HouseholdNotes";
+import VisitLogs from "./pages/Service/VisitLogs"; // NEW
+
 export default function App() {
   return (
     <Router>
@@ -47,6 +57,25 @@ export default function App() {
                 path="/culinary/recipe-framework"
                 element={<RecipeFramework />}
               />
+
+              {/* Service Subpages */}
+              <Route path="/service/pricing-plans" element={<PricingPlans />} />
+              <Route path="/service/add-ons" element={<AddOns />} />
+              <Route path="/service/sops" element={<ServiceSOPs />} />
+              <Route path="/service/client-intake" element={<ClientIntake />} />
+              <Route path="/service/weekly-flow" element={<WeeklyServiceFlow />} />
+              <Route
+                path="/service/household-profiles"
+                element={<HouseholdProfiles />}
+              />
+              <Route
+                path="/service/household-notes"
+                element={<HouseholdNotes />}
+              />
+              <Route
+                path="/service/visit-logs"
+                element={<VisitLogs />}
+              /> {/* NEW */}
             </Routes>
           </Layout>
         </div>
